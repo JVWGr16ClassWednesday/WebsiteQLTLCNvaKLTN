@@ -4,7 +4,7 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
- 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	 <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/font-awesome.min.css">
     <script src="js/jquery.min.js"></script>
@@ -14,6 +14,7 @@
     <div class="container">
         <div class="row">
             <img src="header.jpg" class="img-rounded" alt="Cinque Terre" width="100%">
+            <hr />
         </div>
         <div class="row">
             <nav class="navbar navbar-default">
@@ -23,7 +24,7 @@
                             <a href="TrangChu.jsp"> Trang chủ</a>
                         </li>
                         <li class="active"><a href="Quanlytaikhoan.jsp">Quản lý tài khoản</a></li>
-                        <li><a href="QuanLyDeTai.jsp" class="active">Quản lý đề tài</a></li>
+                        <li><a href="QuanLyDeTai.jsp">Quản lý đề tài</a></li>
                         <li><a href="KiemTraSaoChep.jsp">Kiểm tra sao chép</a></li>
                         <li><a href="SoSanh.jsp">So sánh</a></li>
                         <li><a href="Loc.jsp">Lọc</a></li>
@@ -36,31 +37,42 @@
             </nav>
         </div>
         <div class="row">
-            <div class="col-md-6">
-                <div class="panel panel-default">
-                    <div class="panel-body">
-                    <form name="form1" id="form1" action="Upload" method="post" enctype="multipart/form-data">
-                        <label>Import tài khoản Giảng Viên</label>
-                        <input type="file" name="file" multiple/>
-                        <input class="button" type="submit" name="Submit" value="Upload files"/>
-                        <br />
-                        <br />
-                        <a href="DanhSachTaiKhoanGiangVienDuocImport.jsp" class="btn btn-primary">Tạo Tài khoản</a>
-                        </form>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="panel panel-default">
-                    <div class="panel-body">
-                    <form name="form2" id="form2" action="Upload1" method="post" enctype="multipart/form-data">
-                     <label>Import tài khoản Sinh Viên</label>
-                        <input type="file" name="file" multiple/>
-                        <input class="button" type="submit" name="Submit" value="Upload files"/>
-                        <br />
-                        <br />
-                        <a href="DanhSachTaiKhoanSinhVienDuocImport.jsp" class="btn btn-primary">Tạo Tài khoản</a>
-                       </form>
+            <div class="panel panel-default">
+                <div class="panel-heading">Danh sách tài khoản Sinh Viên</div>
+                <div class="panel-body">
+                    <div class="table-responsive">
+                        <table class="table table-striped table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th class="text-center">STT</th>
+                                    <th class="text-center">Mã SV</th>
+                                    <th class="text-center">Họ Tên</th>
+                                    <th class="text-center">Email</th>
+                                    <th class="text-center">Tạo tài khoản</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="text-center">1</td>
+                                    <td class="text-center">12110247</td>
+                                    <td>Trịnh Thị Thanh Xuân</td>
+                                    <td>xuan@gmail.com</td>
+                                    <td class="text-center">
+                                        <input type="checkbox"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="text-center">2</td>
+                                    <td class="text-center">12110157</td>
+                                    <td>Bùi Thị Thúy Quỳnh</td>
+                                    <td>quynh@gmail.com</td>
+                                    <td class="text-center">
+                                        <input type="checkbox" />
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <a href="DanhSachTaiKhoanSinhVienDuocTao.jsp" class="btn btn-primary">Tạo tài khoản</a>
                     </div>
                 </div>
             </div>
@@ -73,7 +85,7 @@
             </div>
         </div>
     </div>
-    <div class="container">
+        <div class="container">
      <div class="row">
      </div>
         <div id="footer">

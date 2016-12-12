@@ -28,7 +28,7 @@
       <s:query dataSource="${ds}" var="selectQ">
         select count(*) as kount from users
         where username='${param.txtTenTaiKhoanDN}'
-        and password='${param.txtMatKhauDN}'
+        and password='${param.txtMatKhauDN}'and accessright='1'
       </s:query>
  
       <c:forEach items="${selectQ.rows}" var="r">
