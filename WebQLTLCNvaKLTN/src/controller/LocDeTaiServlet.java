@@ -66,7 +66,7 @@ public class LocDeTaiServlet extends HttpServlet {
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String mota = request.getParameter("nhap_abstract");
-		System.out.println(mota);
+//		System.out.println(mota);
 //		int  result = mota.compareTo(QuanLyDeTai.TimMoTaDeTai());
 		
 //		System.out.println("------>"+result);
@@ -78,19 +78,16 @@ public class LocDeTaiServlet extends HttpServlet {
 			
 			// tim mo ta de tai cua tat ca ca de tai da co trong database
 			String sql = "SELECT motadt FROM detai";
-			System.out.println(sql);
+//			System.out.println(sql);
 			// tao mot bien resulset de luu lai ket qua cua cau truy van
 			ResultSet resultSet = statement.executeQuery(sql);
 			while (resultSet.next()){
 				
 				//voi tung ket qua duoc tra ve, lay noi dung can lay dua vao bien res
 				res = resultSet.getString("motadt");
-				System.out.println("res---->" + res);
 				//dua hai chuoi can so sanh vao hai list co kieu dl la char.
 				char[] firstString = convertFromUTF8(mota).toLowerCase().toCharArray();
 			    char[] secondString = res.toLowerCase().toCharArray();
-			    System.out.println("firstString" + firstString);
-			    System.out.println("secondString" + secondString);
 			    
 			    //sap xep cac gia tri trong tung list theo gia tri tu thap den cao  
 			    Arrays.sort(firstString);
@@ -106,15 +103,9 @@ public class LocDeTaiServlet extends HttpServlet {
 					//trong tung ket qua duoc tra ve
 					while (results.next()){
 						res_1 = results.getInt("id");
-						// thuc hien truy van lay tat ca cac thong tin cua de tai theo id.
-						String sql_full = "SELECT * FROM detai WHERE id='" + res_1+ "'";
-						//ket qua truy van duoc luu vao bien results_full
-						ResultSet results_full = statement.executeQuery(sql_full);
-						while(results_full.next()){
-					        request.getRequestDispatcher("/ResultLocDeTai.jsp").forward(request, response);
-						}
+						request.setAttribute("name", res_1);
+						request.getRequestDispatcher("Loc.jsp").forward(request, response);
 						
-						System.out.println(res_1);
 					}
 
 			        System.out.println("Both the string contain same charecter");

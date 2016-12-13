@@ -1,5 +1,13 @@
+<%@page import="utils.ConnectionDB"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql"%>
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.Statement"%>
+<%@page import="java.sql.Connection"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.util.List"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -49,8 +57,8 @@
 	                </div>
             	</div>
         	</form>
-            
             <div class="table-responsive">
+			<input type="text" name="myhiddenvalue" value="<%=request.getAttribute("name") %>" />
                 <table class="table table-striped table-bordered table-hover">
                     <thead>
                         <tr>
@@ -61,20 +69,57 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>Phát triển ứng dụng đa nền tảng cho điện thoại di động</td>
-                            <td class="text-center"> TLCN</td>
-                            <td>Nguyễn Trần Thi Văn</td>
-                            <td class="text-center"><a href="KetQuaSoSanh.jsp">Chi tiết</a></td>
-                        </tr>
-                        <tr>
-                            <td>Phát triển ứng dụng đa nền tảng cho điện thoại di động</td>
-                            <td class="text-center"> TLCN</td>
-                            <td>Nguyễn Trần Thi Văn</td>
-                            <td class="text-center"><a href="KetQuaSoSanh.jsp">Chi tiết</a></td>
-                        </tr>
-                    </tbody>
-                </table>
+                        <%
+                        	Statement statement = null;
+                        
+                        try
+                        {
+                        	Connection connection = ConnectionDB.getConnection();
+                        	statement = connection.createStatement();
+
+                                String sqlString = "SELECT * FROM detai WHERE id ='" + request.getAttribute("name") + "'" ;
+                                
+                                ResultSet rs= statement.executeQuery(sqlString);
+                                
+                                if(!rs.isBeforeFirst())
+                                {
+                                    %>
+                                        <tr>
+                                        <td colspan="3"><center><%out.print("No Files!"); %></center></td>
+                                        </tr>
+                                    <%
+                                }    
+                                
+                                while(rs.next())
+                                {   
+                            %>
+                                    <tr>
+                                        <td><center><%out.print(rs.getString("tendt")); %></center></td>
+                                        <td><center><%out.print(rs.getString("loaidt")); %></center></td>
+                                        <td><center><%out.print(rs.getString("gvhd")); %></center></td>
+                                        <td>
+                                        <center>
+                                        <a href="view_file.jsp?id=<%out.print(rs.getString("id"));%>">Chi Tiết</a>
+                                        </center>
+                                        </td>
+                                    </tr>
+                            <%
+                                }
+                            %>
+                            
+                </tbody> 
+        </table>
+                            
+                            <%
+                                rs.close();
+                            statement.close();
+                            statement.close();
+                        }catch(Exception e){e.printStackTrace();}    
+                        
+                    %>
+                        
+                 <!--    </tbody>
+                </table> -->
             </div>
         </div>
     </div>
