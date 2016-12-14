@@ -28,8 +28,8 @@
             <div class="panel panel-default">
                 <div class="panel-body">
                     <a href="DangNhap.jsp" target="" class="btn btn-primary">Admin</a>
-                    <a href="DangNhapGV.jsp" target="" class="btn btn-primary">Giảng Viên</a>
-                    <a href="DangNhapSV.jsp" target="" class="btn btn-primary">Sinh Viên</a>
+                    <a href="DangNhap.jsp" target="" class="btn btn-primary">Giảng Viên</a>
+                    <a href="DangNhap.jsp" target="" class="btn btn-primary">Sinh Viên</a>
                 </div>
             </div>
         </div>

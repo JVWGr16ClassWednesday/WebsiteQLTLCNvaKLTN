@@ -23,7 +23,8 @@
 	</style>
 </head>
 <body>
-	<form  action="KiemTraDangNhap.jsp" method="post" id="FrmDN" novalidate="novalidate">
+	<form  action="KiemTraDangNhap" method="post" id="FrmDN" novalidate="novalidate">
+	<input type="text" value="<%=session.getAttribute("error")%>" >
 		<div class="container">
         <div class="row">
             <img src="header.jpg" class="img-rounded" alt="Cinque Terre" width="100%">
@@ -49,9 +50,10 @@
                     <a class="btn btn-danger" href="TrangChu.jsp">Hủy</a>
                 </div>
                 <font color="red">
-		        	<c:if test="${not empty param.errMsg}">
-		            <c:out value="${param.errMsg}" />
-		            </c:if>
+               <c:set var="er" value='<%=session.getAttribute("error")%>'></c:set>
+		        <c:if test="${er == true }">
+		            <c:out value="Tên đăng nhập hoặc mật khẩu sai" />
+		        </c:if>
 		        </font>
             </div>
         </div>

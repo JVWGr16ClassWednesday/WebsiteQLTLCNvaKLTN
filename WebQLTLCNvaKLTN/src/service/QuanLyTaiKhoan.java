@@ -107,6 +107,28 @@ public class QuanLyTaiKhoan {
 		return false;
 		
 	}
+	
+	public static int KiemTraDangNhap(String username, String password){
+		Statement statement = null;
+		int res = -1;
+		try (Connection connection = ConnectionDB.getConnection()) {
+			statement = connection.createStatement();
+			
+			String sql = "SELECT accessright FROM users WHERE username ='" + username + "' and password= '" + password + "'" ;
+			System.out.println(sql);
+			ResultSet resultSet = statement.executeQuery(sql);
+			while (resultSet.next()){
+
+				res = resultSet.getInt("accessright");
+				statement.close();
+			}
+			System.out.println(sql);
+		}
+		catch (Exception e) {
+			// TODO: handle exception
+		}
+		return res;
+	}
 
 
 }
