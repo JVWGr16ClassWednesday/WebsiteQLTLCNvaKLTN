@@ -6,7 +6,7 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
- 	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/font-awesome.min.css">
     <script src="js/jquery.min.js"></script>
@@ -32,39 +32,13 @@
         	</c:choose>
         </div>
         <div class="row">
-            <div class="col-md-6">
-                <div class="panel panel-default">
-                    <div class="panel-body">
-                    <form name="form1" id="form1" action="Upload" method="post" enctype="multipart/form-data">
-                        <label>Import tài khoản Giảng Viên</label>
-                        <input type="file" name="file" multiple/>
-                        <input class="button" type="submit" name="Submit" value="Upload files"/>
-                        <br />
-                        <br />
-                        <a href="DanhSachTaiKhoanGiangVienDuocImport.jsp" class="btn btn-primary">Tạo Tài khoản</a>
-                        </form>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="panel panel-default">
-                    <div class="panel-body">
-                    <form name="form2" id="form2" action="Upload1" method="post" enctype="multipart/form-data">
-                     <label>Import tài khoản Sinh Viên</label>
-                        <input type="file" name="file" multiple/>
-                        <input class="button" type="submit" name="Submit" value="Upload files"/>
-                        <br />
-                        <br />
-                        <a href="DanhSachTaiKhoanSinhVienDuocImport.jsp" class="btn btn-primary">Tạo Tài khoản</a>
-                       </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row">
             <div class="panel panel-default">
+                <div class="panel-heading">Kiểm Tra sao chép đề tài</div>
                 <div class="panel-body">
-                    <a href="Quanlytaikhoan.jsp" class="btn btn-primary">Trở về</a>
+                    <a href="TimKiemDeTai.jsp" class="btn btn-primary">Tìm kiếm đề tài</a>
+                    <br />
+                    <br />
+                    <a href="KiemTraFileThuyetMinh.jsp" class="btn btn-primary">Kiểm tra sao chép file thuyết minh</a>
                 </div>
             </div>
         </div>

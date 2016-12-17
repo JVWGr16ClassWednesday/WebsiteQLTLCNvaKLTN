@@ -53,8 +53,7 @@ public class KiemTraDangNhapServlet extends HttpServlet {
 			session.setAttribute("error", true);
 			response.sendRedirect("DangNhap.jsp");
 		}
-		System.out.println(name);
-		System.out.println(pass);
+
 	}
 
 }

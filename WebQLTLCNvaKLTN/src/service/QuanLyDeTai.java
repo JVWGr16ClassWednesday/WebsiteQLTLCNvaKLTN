@@ -33,12 +33,12 @@ public class QuanLyDeTai {
 			statement = connection.createStatement();
 			
 			String sql = "SELECT motadt FROM detai";
-			System.out.println(sql);
+//			System.out.println(sql);
 			ResultSet resultSet = statement.executeQuery(sql);
 			while (resultSet.next()){
 
 				res = resultSet.getString("motadt");
-				System.out.println(res);
+//				System.out.println(res);
 //				statement.close();
 			}
 //			System.out.println(sql);
@@ -49,5 +49,7 @@ public class QuanLyDeTai {
 		return res;
 		
 	}
+	
+	
 
 }

@@ -19,7 +19,7 @@
                 <div class="container-fluid">
                     <div style="padding-top:8px;">
                         <a href="TrangChu.jsp" class="btn btn-default pull-left">Trang chủ</a>
-                        <a href="DangNhapChung.jsp" class="btn btn-primary pull-right">Đăng nhập</a>
+                        <a href="DangNhap.jsp" class="btn btn-primary pull-right">Đăng nhập</a>
                     </div>
                 </div>
             </nav>

@@ -1,5 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"
-    pageEncoding="utf-8"%>
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ taglib uri="/WEB-INF/tlds/taglib.tld" prefix="tag"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="s" %>    
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -17,24 +19,18 @@
             <hr />
         </div>
         <div class="row">
-            <nav class="navbar navbar-default">
-                <div class="container-fluid">
-                    <ul class="nav navbar-nav">
-                        <li>
-                            <a href="TrangChu.jsp"> Trang chủ</a>
-                        </li>
-                        <li class="active"><a href="Quanlytaikhoan.jsp">Quản lý tài khoản</a></li>
-                        <li><a href="QuanLyDeTai.jsp">Quản lý đề tài</a></li>
-                        <li><a href="KiemTraSaoChep.jsp">Kiểm tra sao chép</a></li>
-                        <li><a href="SoSanh.jsp">So sánh</a></li>
-                        <li><a href="Loc.jsp">Lọc</a></li>
-                    </ul>
-                    <div style="padding-top:8px;">
-                        <!--<label class="col-md-offset-3" style="padding-top:8px;">Admin</label>  -->
-                        <a href="DangNhapChung.jsp" class="btn btn-primary pull-right">Đăng xuất</a>
-                    </div>
-                </div>
-            </nav>
+            <c:set var="accessright" value='<%=session.getAttribute("accessright") %>'></c:set>
+        	<c:choose>
+        		<c:when test="${accessright == 1}">
+        			<tag:headerAD/>
+        		</c:when>
+        		<c:when test="${accessright == 2}">
+        			<tag:headerGV/>
+        		</c:when>
+        		<c:when test="${accessright == 2}">
+        			<tag:headerSV/>
+        		</c:when>
+        	</c:choose>
         </div>
         <div class="row">
             <div class="panel panel-default">

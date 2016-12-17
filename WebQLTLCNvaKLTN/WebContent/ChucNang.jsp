@@ -27,7 +27,7 @@
         			<tag:headerGV/>
         		</c:when>
         		<c:when test="${accessright == 2}">
-        			<tag:headerGV/>
+        			<tag:headerSV/>
         		</c:when>
         	</c:choose>
            

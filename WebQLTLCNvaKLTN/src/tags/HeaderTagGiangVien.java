@@ -17,11 +17,11 @@ public class HeaderTagGiangVien extends SimpleTagSupport{
 		out.println("                        <li>");
 		out.println("                            <a href=\"TrangChu.jsp\"> Trang chủ</a>");
 		out.println("                        </li>");
-		out.println("                        <li><a href=\"QuanLyDeTaiGV.jsp\">Quản lý đề tài</a></li>");
-		out.println("                        <li><a href=\"KiemTraSaoChepGV.jsp\">Kiểm tra sao chép</a></li>");
+		out.println("                        <li><a href=\"QuanLyDeTai.jsp\">Quản lý đề tài</a></li>");
+		out.println("                        <li><a href=\"KiemTraSaoChep.jsp\">Kiểm tra sao chép</a></li>");
 		out.println("                    </ul>");
 		out.println("                    <div style=\"padding-top:8px;\">");
-		out.println("                        <a href=\"DangNhapChung.jsp\" class=\"btn btn-primary pull-right\">Đăng xuất</a>");
+		out.println("                        <a href=\"DangNhap.jsp\" class=\"btn btn-primary pull-right\">Đăng xuất</a>");
 		out.println("                    </div>");
 		out.println("                </div>");
 		out.println("            </nav>");

@@ -24,7 +24,7 @@
 </head>
 <body>
 	<form  action="KiemTraDangNhap" method="post" id="FrmDN" novalidate="novalidate">
-	<input type="text" value="<%=session.getAttribute("error")%>" >
+	<%-- <input type="text" value="<%=session.getAttribute("error")%>" > --%>
 		<div class="container">
         <div class="row">
             <img src="header.jpg" class="img-rounded" alt="Cinque Terre" width="100%">
@@ -45,7 +45,6 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <!--<a  class="btn btn-primary" type="submit" href="ChucNangAdmin.jsp">Đăng nhập</a>  -->
                     <button type="submit" class="btn btn-primary" >Đăng nhập </button>
                     <a class="btn btn-danger" href="TrangChu.jsp">Hủy</a>
                 </div>
@@ -74,8 +73,9 @@
     <!-- jQuery Form Validation code -->
   <script>
   
-  // When the browser is ready...
-  $(function() {
+/*   // When the browser is ready...
+ */ 
+ $(function() {
   
     // Setup form validation on the #register-form element
     $("#FrmDN").validate({

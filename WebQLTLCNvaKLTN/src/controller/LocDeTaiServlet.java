@@ -36,8 +36,8 @@ public class LocDeTaiServlet extends HttpServlet {
 	    }
 	    return out;
 	}
-    
-    public class CompareString {
+    //code tham khảo
+   /* public class CompareString {
 
     	String str = "Result";
     	String str1 = "Struel";
@@ -55,7 +55,7 @@ public class LocDeTaiServlet extends HttpServlet {
     	        System.out.println("Both the string contains different charecter");
     	    }
     	}
-    }
+    }*/
 
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -66,10 +66,6 @@ public class LocDeTaiServlet extends HttpServlet {
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String mota = request.getParameter("nhap_abstract");
-//		System.out.println(mota);
-//		int  result = mota.compareTo(QuanLyDeTai.TimMoTaDeTai());
-		
-//		System.out.println("------>"+result);
 		
 		Statement statement = null;
 		String res = "";
@@ -78,7 +74,6 @@ public class LocDeTaiServlet extends HttpServlet {
 			
 			// tim mo ta de tai cua tat ca ca de tai da co trong database
 			String sql = "SELECT motadt FROM detai";
-//			System.out.println(sql);
 			// tao mot bien resulset de luu lai ket qua cua cau truy van
 			ResultSet resultSet = statement.executeQuery(sql);
 			while (resultSet.next()){
@@ -97,7 +92,6 @@ public class LocDeTaiServlet extends HttpServlet {
 			    	int res_1;
 			    	//neu giong nhau thi thuc hien truy van tim id cua nhung de tai co phan mo ta giong nhu nguoi dung nhap tren text
 			    	String test_sql = "SELECT id FROM detai WHERE motadt LIKE" + "'%" + res + "%'";
-//			    	System.out.println("new query sql"+test_sql);
 			    	//ket qua cua cau truy van duoc luu vao results
 					ResultSet results = statement.executeQuery(test_sql);
 					//trong tung ket qua duoc tra ve
@@ -105,7 +99,6 @@ public class LocDeTaiServlet extends HttpServlet {
 						res_1 = results.getInt("id");
 						request.setAttribute("name", res_1);
 						request.getRequestDispatcher("Loc.jsp").forward(request, response);
-						
 					}
 
 			        System.out.println("Both the string contain same charecter");
@@ -116,7 +109,6 @@ public class LocDeTaiServlet extends HttpServlet {
 			}
 		}
 		catch (Exception e) {
-			// TODO: handle exception
 		}		
 		
 	}

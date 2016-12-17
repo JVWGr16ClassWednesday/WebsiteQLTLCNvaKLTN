@@ -22,7 +22,7 @@ public class HeaderTagSinhVien extends SimpleTagSupport{
 		out.println("                        </li>");
 		out.println("                    </ul>");
 		out.println("                    <div style=\"padding-top:8px;\">");
-		out.println("                        <a href=\"DangNhapChung.jsp\" class=\"btn btn-primary pull-right\">Đăng xuất</a>");
+		out.println("                        <a href=\"DangNhap.jsp\" class=\"btn btn-primary pull-right\">Đăng xuất</a>");
 		out.println("                    </div>");
 		out.println("                </div>");
 		out.println("            </nav>");

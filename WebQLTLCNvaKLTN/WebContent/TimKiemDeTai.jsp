@@ -1,45 +1,45 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@page import="java.io.Console"%>
+<%@page import="model.DeTai"%>
+<%@page import="utils.ConnectionDB"%>
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.Statement"%>
+<%@page import="java.sql.Connection"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.util.List"%>
 <%@ taglib uri="/WEB-INF/tlds/taglib.tld" prefix="tag"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="s" %>
+
 <sql:setDataSource driver="com.mysql.jdbc.Driver"
 	url="jdbc:mysql://localhost/projectweb" user="root" password="root" />
 <sql:query var="items" sql="SELECT id, tendt, motadt, loaidt,truongnhom,masvnt,thanhvien,masvtv,gvhd,magvhd,gvpb,magvpb,diem,nam,tailieu FROM detai" />
 
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="css/bootstrap.min.css">
-<link rel="stylesheet" href="css/font-awesome.min.css">
-<script src="js/jquery.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script>
     	function getRow_ID(row_id){
      		console.log(row_id);
     		document.getElementById('row_id').value = row_id;
     	}
 </script>
-
-<script>
-    	function get_ID(id_detai){
-     		console.log(id_detai);
-    		document.getElementById('id_detai').value = id_detai;
-    	}
-</script>
 </head>
 <body>
-	<div class="container">
-		<form action="SuaDeTaiServlet" method="post" novalidate="novalidate" enctype="multipart/form-data" accept-charset="utf-8">
-			<div class="row">
-				<img src="header.jpg" class="img-rounded" alt="Cinque Terre"
-					width="100%">
-			</div>
-			<div class="row">
-				<c:set var="accessright" value='<%=session.getAttribute("accessright") %>'></c:set>
+    <div class="container">
+        <div class="row">
+            <img src="header.jpg" class="img-rounded" alt="Cinque Terre" width="100%">
+        </div>
+        <div class="row">
+            <c:set var="accessright" value='<%=session.getAttribute("accessright") %>'></c:set>
         	<c:choose>
         		<c:when test="${accessright == 1}">
         			<tag:headerAD/>
@@ -51,72 +51,79 @@
         			<tag:headerSV/>
         		</c:when>
         	</c:choose>
-			</div>
-			<div class="row">
-				<div class="panel panel-default">
-					<div class="panel-heading">Danh sách đề tài</div>
-					<div class="panel-body">
-						<div class="table-responsive">
-							<table class="table table-striped table-bordered table-hover">
-								<thead>
-									<tr>
-										<th>STT</th>
-										<th>Tên Đề Tài</th>
-										<th>Loại Đề Tài</th>
-										<th>GVHD</th>
-										<th>Tuỳ Chỉnh</th>
-									</tr>
-								</thead>
-								<tbody>
-									<c:forEach items="${items.rowsByIndex}" var="row">
-										<tr>
-											<td>${row[0]}</td>
-											<td>${row[1]}</td>
-											<td>${row[3]}</td>
-											<td>${row[8]}</td>
-											<%-- <c:forEach items="${row}" var="col">
-												<td>${col}</td>
-											</c:forEach> --%>
-											<td class="text-center">
-												<button type="button" class="btn btn-info btn-xs"
-													data-toggle="modal" data-target="#ChinhSuaDeTai"
-													data-tendt="${row[1]}" 
-													data-motadt="${row[2]}"
-													data-loaidt="${row[3]}" 
-													data-truongnhom="${row[4]}"
-													data-masvtn="${row[5]}"
-													data-thanhvien="${row[6]}"
-													data-masvtv ="${row[7]}"
-													data-gvhd="${row[8]}" 
-													data-magvhd="${row[9]}"
-													data-gvpb="${row[10]}" 
-													data-magvpb="${row[11]}"
-													data-diem="${row[12]}" 
-													data-nam="${row[13]}"
-													data-tailieu ="${row[14]}"
-													onclick="getRow_ID('${row[0]}')">
-													<%-- data-tailieu="${row[14]}"> --%>
-													<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>Sửa
-												</button>
-												<button type="button" class="btn btn-danger btn-xs"
-													data-toggle="modal" 
-													data-target="#modalXoa"
-													data-tendetai="${row[1]}"
-													onclick="get_ID('${row[0]}')">
-													<span class="glyphicon glyphicon-minus" aria-hidden="true"></span>Xóa
-												</button>
-											</td>
-										</tr>
-									</c:forEach>
-								</tbody>
-							</table>
-						</div>
-					</div>
-				</div>
-			</div>
-	</div>
-	<!-- Start Modal sửa thông tin đề tài -->
-	<div class="modal fade" id="ChinhSuaDeTai" role="dialog">
+        </div>
+        <div class="row">
+        	<form action="TimKiemDeTaiServlet" method="post">
+        		<div class="panel panel-default">
+                <div class="panel-heading">Tìm kiếm đề tài</div>
+                <div class="panel-body">
+                    <div class="input-group">
+                        <input type="text" class="form-control" name="txttimkiem" id="txttimkiem" placeholder="Nhập nội dung tìm kiếm hoặc từ khóa">
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="submit">Tìm kiếm</button>
+                        </span>
+                    </div>
+                    <br />
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <div class="table-responsive">
+                            <%-- <input type="text" name="myhiddenvalue" value="<%=session.getAttribute("name") %>" /> --%>
+                                <table class="table table-striped table-bordered table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th class="text-center">Tên đề tài</th>
+                                            <th class="text-center">Loại đề tài</th>
+                                            <th class="text-center">Giáo viên hướng dẫn</th>
+                                            <th class="text-center">Chi tiết</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+	        							<c:forEach items="${name}" var="tmp">
+				                               <td><center>${tmp.getTendt()}</center></td>
+				                               <td><center>${tmp.getLoaidt()}</center></td>
+				                               <td><center>${tmp.getGvhd()}</center></td>
+				                               <td>
+				                               <c:forEach items="${items.rowsByIndex}" var="row">
+					                                <center><button type="button" class="btn btn-info btn-xs"
+														data-toggle="modal" data-target="#XemChiTietDeTai"
+														data-tendt="${row[1]}" 
+														data-motadt="${row[2]}"
+														data-loaidt="${row[3]}" 
+														data-truongnhom="${row[4]}"
+														data-masvtn="${row[5]}"
+														data-thanhvien="${row[6]}"
+														data-masvtv ="${row[7]}"
+														data-gvhd="${row[8]}" 
+														data-magvhd="${row[9]}"
+														data-gvpb="${row[10]}" 
+														data-magvpb="${row[11]}"
+														data-diem="${row[12]}" 
+														data-nam="${row[13]}"
+														data-tailieu ="${row[14]}"
+														onclick="getRow_ID('${row[0]}')">
+														<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>Chi tiết
+													</button></center>
+												</c:forEach>
+				                                </td>
+				                            </tr>
+	        								
+	        							</c:forEach>
+	   
+			                		</tbody> 
+			        		</table>
+		
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        		
+        	</form>
+        </div>
+    </div>
+    
+    <!-- Start Modal xem thông tin chi tiết đề tài -->
+	<div class="modal fade" id="XemChiTietDeTai" role="dialog">
 		<div class="modal-dialog modal-md">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -180,54 +187,15 @@
 
 				</div>
 				<div class="modal-footer">
-					<button type="submit" class="btn btn-primary" name="btnaction">Sửa</button>
 					<button type="button" class="btn btn-danger" data-dismiss="modal">Đóng</button>
 				</div>
 			</div>
 		</div>
 	</div>
-	
-	<div class="container">
-		<div class="row"></div>
-		<div id="footer">
-			<hr>
-			<h5 class="text-center text-danger">Khoa Công nghệ Thông tin -
-				Đại học Sư phạm Kỹ thuật TP. Hồ Chí Minh</h5>
-			<h5 class="text-center text-danger">Số 1, Võ Văn Ngân, Thủ Đức,
-				TP. Hồ Chí Minh</h5>
-		</div>
-	</div>
-	</form>
-	<form action="XoaDeTaiServlet" method="post" novalidate="novalidate" accept-charset="utf-8">
-		<!-- Start Modal xóa đề tài -->
-		<div class="modal fade" id="modalXoa" role="dialog">
-				<div class="modal-dialog">
-					<div class="modal-content">
-						<div class="modal-header">
-							<button type="button" class="close" data-dismiss="modal">&times;</button>
-							<h4>Xóa Đề Tài</h4>
-						</div>
-						<div class="modal-body">
-							<div class="form-group">
-								<input type="hidden" id="id_detai" name="id_detai">
-								<h5 class="modal-title"></h5>
-							</div>
-						</div>
-						<div class="modal-footer">
-							<input name="btnxoa" type="submit" class="btn btn-danger" value="Xóa">
-							<button type="" class="btn btn-info" data-dismiss="modal">Hủy</button>
-						</div>
-					</div>
-				</div>
-			</div>
-		<!-- End Modal Xóa Đề Tài  -->
-	</form>
-	</div>
-	
-	
+	<!-- End Modal xem thông tin chi tiết đề tài -->
 	
 	<script type="text/javascript">
-	$('#ChinhSuaDeTai').on('show.bs.modal', function (event) {
+	$('#XemChiTietDeTai').on('show.bs.modal', function (event) {
 		  var button = $(event.relatedTarget) // Button that triggered the modal
 		  
 		  var tendt = button.data('tendt')
@@ -278,17 +246,16 @@
 		  console.log
 		  modal.find('.modal-body #file_2').prop('href',"DownLoadTaiLieuServlet?file="+tailieu)
 		});
-	$('#modalXoa').on('show.bs.modal', function (event) {
-		  var button = $(event.relatedTarget) // Button that triggered the modal
-		  var tendetai = button.data('tendetai')
-		 
-		   //Extract info from data-* attributes
-		  // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
-		  // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
-		  var modal = $(this)
-		  //alert(msp)
-		  modal.find('.modal-title').text('Bạn có muốn xóa đề tài "' + tendetai + '" không?')
-		});
 	</script>
+	
+    <div class="container">
+     <div class="row">
+     </div>
+        <div id="footer">
+        <hr>
+            <h5 class="text-center text-danger">Khoa Công nghệ Thông tin - Đại học Sư phạm Kỹ thuật TP. Hồ Chí Minh</h5>
+            <h5 class="text-center text-danger">Số 1, Võ Văn Ngân, Thủ Đức, TP. Hồ Chí Minh</h5>
+        </div>
+    </div>
 </body>
 </html>

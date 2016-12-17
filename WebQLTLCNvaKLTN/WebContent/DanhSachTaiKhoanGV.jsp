@@ -2,6 +2,9 @@
 <%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
+<%@ taglib uri="/WEB-INF/tlds/taglib.tld" prefix="tag"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="s" %>
 
 <sql:setDataSource driver="com.mysql.jdbc.Driver"
 	url="jdbc:mysql://localhost/projectweb" user="root" password="root" />
@@ -47,24 +50,18 @@
 				<hr />
 			</div>
 			<div class="row">
-				<nav class="navbar navbar-default">
-				<div class="container-fluid">
-					<ul class="nav navbar-nav">
-						<li><a href="TrangChu.jsp"> Trang chủ</a></li>
-						<li><a href="Quanlytaikhoan.jsp">Quản lý tài khoản</a></li>
-						<li><a href="QuanLyDeTai.jsp" class="active">Quản lý đề
-								tài</a></li>
-						<li><a href="KiemTraSaoChep.jsp">Kiểm tra sao chép</a></li>
-						<li><a href="SoSanh.jsp">So sánh</a></li>
-						<li><a href="Loc.jsp">Lọc</a></li>
-					</ul>
-					<div style="padding-top: 8px;">
-						<!--<label class="col-md-offset-3" style="padding-top:8px;">Admin</label>  -->
-						<a href="DangNhapChung.jsp" class="btn btn-primary pull-right">Đăng
-							xuất</a>
-					</div>
-				</div>
-				</nav>
+				<c:set var="accessright" value='<%=session.getAttribute("accessright") %>'></c:set>
+        	<c:choose>
+        		<c:when test="${accessright == 1}">
+        			<tag:headerAD/>
+        		</c:when>
+        		<c:when test="${accessright == 2}">
+        			<tag:headerGV/>
+        		</c:when>
+        		<c:when test="${accessright == 2}">
+        			<tag:headerSV/>
+        		</c:when>
+        	</c:choose>
 			</div>
 			<div class="row">
 				<div class="panel panel-default">
@@ -99,6 +96,7 @@
 													data-myname="${row[3]}"
 													data-masv="${row[5]}"
 													data-password="${row[2]}"
+													data-access = "${row[4]}"
 													onclick="get_rowID('${row[0]}')" name="btnsua">
 													<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>Sửa
 												</button>
@@ -179,6 +177,17 @@
 						<label for="inputlg">Password:</label> <input type="text"
 							class="form-control" id="pass" name="passsua" required>
 					</div>
+					
+					<div class="form-group">
+						<label for="inputlg">Access right:</label>
+						<br/>
+						<label for="inputlg">Quyền Giảng Viên:</label>
+						<input type="checkbox" name="accessgv" id="accessgv">
+						<br/>
+						<label for="inputlg">Quyền Sinh Viên:</label>
+						<input type="checkbox" name="accesssv" id="accesssv">
+					</div>
+					
 				</div>
 				<div class="modal-footer">
 					<input type="submit" class="btn btn-primary" name="btnsua" value="Sửa"></input>
@@ -216,11 +225,25 @@
 		  
 		  var password = button.data('password')
 		  
-		  var modal = $(this)
+		 var access = button.data('access')
+		 
+		 console.log(access)
+		
+		  var modal = $(this)	
 		  modal.find('.modal-body input#masv').val(masv)
 		  modal.find('.modal-body input#ten').val(myname)
 		  modal.find('.modal-body input#email').val(username)
 		  modal.find('.modal-body input#pass').val(password)
+		  if(access == 1)
+			{
+				 modal.find('.modal-body input#accessgv').prop('checked', true)
+				 modal.find('.modal-body input#accesssv').prop('checked', false)
+		  	}
+			else if (access == 2)
+			{
+				modal.find('.modal-body input#accessgv').prop('checked', false)
+				modal.find('.modal-body input#accesssv').prop('checked', true)
+			}
 		});
 	$('#modalXoa').on('show.bs.modal', function (event) {
 		  var button = $(event.relatedTarget) // Button that triggered the modal

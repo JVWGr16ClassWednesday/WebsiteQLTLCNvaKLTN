@@ -19,7 +19,7 @@ public class QuanLyTaiKhoan {
 			statement = connection.createStatement();
 			
 			String sql = "DELETE FROM users WHERE id='" + maGV + "'";
-			System.out.println(sql);
+//			System.out.println(sql);
 			statement.execute(sql);
 //			statement.close();
 			
@@ -38,14 +38,14 @@ public class QuanLyTaiKhoan {
 			statement = connection.createStatement();
 			
 			String sql = "SELECT accessright FROM users WHERE id='" + maGV + "'";
-			System.out.println(sql);
+//			System.out.println(sql);
 			ResultSet resultSet = statement.executeQuery(sql);
 			while (resultSet.next()){
 
 				res = resultSet.getInt("accessright");
 				statement.close();
 			}
-			System.out.println(sql);
+//			System.out.println(sql);
 		}
 		catch (Exception e) {
 			// TODO: handle exception
@@ -57,16 +57,16 @@ public class QuanLyTaiKhoan {
 		Statement statement = null;
 		try (Connection connection = ConnectionDB.getConnection()) {
 			statement = connection.createStatement();
-			System.out.println("----->"+user.getMyname());
+//			System.out.println("----->"+user.getMyname());
 			String sql = "UPDATE users" + " SET "
 					+ " username = '"+ user.getUsername()+"'" + ","
 					+ " password = '" + user.getPassword()+"'" + ","
 					+ " myname ='" +user.getMyname()+"'" + ","
 					+ " masv ='" +user.getMasv()+ "'"
 					+ " WHERE id='"+ user.getId()+"'"; 
-			System.out.println(sql);
+//			System.out.println(sql);
 			statement.executeUpdate(sql);
-			System.out.println("update thanh cong");
+//			System.out.println("update thanh cong");
 			return true;
 		}
 		catch (Exception e) {
@@ -96,7 +96,7 @@ public class QuanLyTaiKhoan {
 		try (Connection connection = ConnectionDB.getConnection()) {
 			statement = connection.createStatement();	
 			String sql = "insert into users(username, password, myname, accessright,masv) values ('" + user.getUsername() + "','" + user.getPassword() + "','" + user.getMyname() + "','" + user.getAccessright() + "','" +user.getId() + "')";
-			System.out.println(sql);
+//			System.out.println(sql);
 			
 			statement.executeUpdate(sql);
 			return true;
@@ -115,14 +115,14 @@ public class QuanLyTaiKhoan {
 			statement = connection.createStatement();
 			
 			String sql = "SELECT accessright FROM users WHERE username ='" + username + "' and password= '" + password + "'" ;
-			System.out.println(sql);
+//			System.out.println(sql);
 			ResultSet resultSet = statement.executeQuery(sql);
 			while (resultSet.next()){
 
 				res = resultSet.getInt("accessright");
 				statement.close();
 			}
-			System.out.println(sql);
+//			System.out.println(sql);
 		}
 		catch (Exception e) {
 			// TODO: handle exception
