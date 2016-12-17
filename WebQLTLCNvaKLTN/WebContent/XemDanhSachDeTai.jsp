@@ -95,7 +95,6 @@
 													data-nam="${row[13]}"
 													data-tailieu ="${row[14]}"
 													onclick="getRow_ID('${row[0]}')">
-													<%-- data-tailieu="${row[14]}"> --%>
 													<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>Sửa
 												</button>
 												<button type="button" class="btn btn-danger btn-xs"
