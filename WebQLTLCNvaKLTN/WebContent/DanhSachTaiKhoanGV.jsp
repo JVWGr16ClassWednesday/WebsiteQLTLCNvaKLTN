@@ -33,17 +33,40 @@
 		document.getElementById('id_user').value = id_user;
 	}
 </script>
-<!-- <script>
-	function foo()
-	{
-	   alert("Submit button clicked!");
-	   return true;
+
+<%-- <script>
+	function show_id(user_id) {
+		console.log(user_id);
+		document.getElementById('user_id').value = user_id;
 	}
-</script> -->
+</script> --%>
+
+
+<script>
+	function change_icon() {
+		var btnKhoa = document.getElementById("id_khoa");
+		//console.log('btnKhoa.value');
+		console.log(btnKhoa.innerHTML);
+		console.log(btnKhoa.innerText);
+		
+		if (btnKhoa.innerText == 'Khóa' &&  btnKhoa.innerHTML == '<span class="fa fa-unlock" aria-hidden="true"></span> Khóa') {
+			btnKhoa.innerHTML = '<span class="fa fa-lock" aria-hidden="true"></span> Mở khóa'
+			//document.getElementById('value_btnkhoa').value = '1';
+		}
+		else {
+			btnKhoa.innerHTML = '<span class="fa fa-unlock" aria-hidden="true"></span> Khóa'
+			//document.getElementById('value_btnkhoa').value = '2';
+		}
+		//console.log(document.getElementById('value_btnkhoa').value);
+	}
+</script>
+
 </head>
 <body>
 	<div class="container">
 	<form action="${pageContext.request.contextPath}/QuanLyTaiKhoanServlet" method="post" novalidate>
+		<input type="hidden" id="user_id" name="user_id">
+		<input type="hidden" id="value_btnkhoa" name="value_btnkhoa">
 		<div class="row">
 				<img src="header.jpg" class="img-rounded" alt="Cinque Terre"
 					width="100%">
@@ -87,7 +110,11 @@
 											<td>${row[1]}</td>
 											<td>${row[3]}</td>
 											<td class="text-center">
-												<button type="button" class="btn btn-warning btn-xs">
+												<button type="button"
+														name="btnkhoa"
+														class="btn btn-warning btn-xs" 
+														id="id_khoa" 
+														onclick="change_icon()">
 													<span class="fa fa-unlock" aria-hidden="true"></span> Khóa
 												</button>
 												<button type="button" class="btn btn-info btn-xs"

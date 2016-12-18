@@ -43,32 +43,43 @@ public class QuanLyTaiKhoanServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
 		String row_id = request.getParameter("row_id");
+		String user_id_khoa = request.getParameter("user_id");
+		String btnkhoa = request.getParameter("value_btnkhoa");
+		System.out.println("value btn khoa: "+ btnkhoa);
+		System.out.println("user id khoa: "+ user_id_khoa);
 		
 		String user_id = request.getParameter("id_user");
 		String name = request.getParameter("tensua");
 		String email = request.getParameter("emailsua");
 		String password =request.getParameter("passsua");
 		String masv = request.getParameter("masvsua");
-		
-		System.out.println(row_id);
-		
-//		System.out.println(name);
-//		System.out.println(email);
-//		System.out.println(password);
-//		
-//		
-//		
-//		System.out.println(row_id);
-//	
-//		String magv_sua = request.getParameter("masv_sua");
-//		System.out.println(magv_sua);
+	
 		
 		String btnxoa = request.getParameter("btnxoa");
-		System.out.println(btnxoa);
+//		System.out.println(btnxoa);
 		
 		String btnsua = request.getParameter("btnsua");
-		System.out.println(btnsua);
+//		System.out.println(btnsua);
+		
+		
 //		
+		/*if(request.getParameter("value_btnkhoa") == "2"){
+			System.out.println("==============cái quần đùi");
+			if(QuanLyTaiKhoan.Khoataikhoan(Integer.parseInt(user_id_khoa), 1))
+			{
+				response.sendRedirect("DanhSachTaiKhoanGV.jsp");
+			}
+		}
+		else{
+			System.out.println("==============cái quần đùi");
+			//QuanLyTaiKhoan.Khoataikhoan(Integer.parseInt(user_id_khoa), 2);
+			if(QuanLyTaiKhoan.Khoataikhoan(Integer.parseInt(user_id_khoa), 2))
+			{
+				response.sendRedirect("DanhSachTaiKhoanGV.jsp");
+			}
+			
+		}*/
+		
 		if (request.getParameter("btnxoa") != null) {
 			
 			System.out.println("xóa tài khoản");
@@ -89,7 +100,8 @@ public class QuanLyTaiKhoanServlet extends HttpServlet {
 				}
 			}
           
-        } 
+        }
+		// neu field khoakt ==1 , thi hong cho dang nhap, khoatk==2 thi cho dang nhap
 		
 		if(request.getParameter("btnsua") != null) {
 			System.out.println("sửa tài khoản");

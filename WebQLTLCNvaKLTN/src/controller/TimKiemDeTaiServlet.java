@@ -65,8 +65,19 @@ public class TimKiemDeTaiServlet extends HttpServlet {
 			while (resultSet.next()){
 				DeTai detai = new DeTai();
 				detai.setTendt(resultSet.getString("tendt"));
-				detai.setLoaidt(resultSet.getString("loaidt"));
-				detai.setGvhd(resultSet.getString("gvhd"));				
+				detai.setMotadt(resultSet.getString("motadt"));
+				detai.setLoaidt(resultSet.getString("loaidt"));				
+				detai.setTruongnhom(resultSet.getString("truongnhom"));
+				detai.setMasvtn(resultSet.getInt("masvnt"));
+				detai.setThanhvien(resultSet.getString("thanhvien"));
+				detai.setMasvtv(resultSet.getInt("masvtv"));
+				detai.setGvhd(resultSet.getString("gvhd"));
+				detai.setMagvhd(resultSet.getInt("magvhd"));
+				detai.setGvpb(resultSet.getString("gvpb"));
+				detai.setMagvpb(resultSet.getInt("magvpb"));
+				detai.setDiem(resultSet.getFloat("diem"));
+				detai.setNam(resultSet.getInt("nam"));
+				detai.setTailieu(resultSet.getString("tailieu"));
 				deTais.add(detai);
 				
 			}

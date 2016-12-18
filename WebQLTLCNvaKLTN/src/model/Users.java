@@ -7,6 +7,13 @@ public class Users {
 	private String myname;
 	private int accessright;
 	private String masv;
+	private int khoatk;
+	public int getKhoatk() {
+		return khoatk;
+	}
+	public void setKhoatk(int khoatk) {
+		this.khoatk = khoatk;
+	}
 	public String getMasv() {
 		return masv;
 	}

@@ -13,9 +13,6 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="s" %>
 
-<sql:setDataSource driver="com.mysql.jdbc.Driver"
-	url="jdbc:mysql://localhost/projectweb" user="root" password="root" />
-<sql:query var="items" sql="SELECT id, tendt, motadt, loaidt,truongnhom,masvnt,thanhvien,masvtv,gvhd,magvhd,gvpb,magvpb,diem,nam,tailieu FROM detai" />
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -79,34 +76,33 @@
                                     </thead>
                                     <tbody>
 	        							<c:forEach items="${name}" var="tmp">
+	        							 <tr>
 				                               <td><center>${tmp.getTendt()}</center></td>
 				                               <td><center>${tmp.getLoaidt()}</center></td>
 				                               <td><center>${tmp.getGvhd()}</center></td>
+				                               
 				                               <td>
-				                               <c:forEach items="${items.rowsByIndex}" var="row">
 					                                <center><button type="button" class="btn btn-info btn-xs"
 														data-toggle="modal" data-target="#XemChiTietDeTai"
-														data-tendt="${row[1]}" 
-														data-motadt="${row[2]}"
-														data-loaidt="${row[3]}" 
-														data-truongnhom="${row[4]}"
-														data-masvtn="${row[5]}"
-														data-thanhvien="${row[6]}"
-														data-masvtv ="${row[7]}"
-														data-gvhd="${row[8]}" 
-														data-magvhd="${row[9]}"
-														data-gvpb="${row[10]}" 
-														data-magvpb="${row[11]}"
-														data-diem="${row[12]}" 
-														data-nam="${row[13]}"
-														data-tailieu ="${row[14]}"
-														onclick="getRow_ID('${row[0]}')">
+														data-tendt="${tmp.getTendt()}" 
+														data-motadt="${tmp.getMotadt()}"
+														data-loaidt="${tmp.getLoaidt()}" 
+														data-truongnhom="${tmp.getTruongnhom()}"
+														data-masvtn="${tmp.getMasvtn()}"
+														data-thanhvien="${tmp.getThanhvien()}"
+														data-masvtv ="${tmp.getMasvtv()}"
+														data-gvhd="${tmp.getGvhd()}" 
+														data-magvhd="${tmp.getMagvhd()}"
+														data-gvpb="${tmp.getGvpb()}" 
+														data-magvpb="${tmp.getMagvpb()}"
+														data-diem="${tmp.getDiem()}" 
+														data-nam="${tmp.getNam()}"
+														data-tailieu ="${tmp.getTailieu()}"
+														onclick="getRow_ID('${tmp.getId()}')">
 														<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>Chi tiết
 													</button></center>
-												</c:forEach>
 				                                </td>
 				                            </tr>
-	        								
 	        							</c:forEach>
 	   
 			                		</tbody> 

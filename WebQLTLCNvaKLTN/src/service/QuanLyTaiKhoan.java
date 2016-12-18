@@ -129,6 +129,25 @@ public class QuanLyTaiKhoan {
 		}
 		return res;
 	}
+	 // ham khoa tai khoan
+	public static boolean Khoataikhoan(int id_user, int khoaTK){
+		System.out.println("-----------------------");
+		Statement statement = null;
+		try (Connection connection = ConnectionDB.getConnection()) {
+			statement = connection.createStatement();
+//			System.out.println("----->"+user.getMyname());
+			String sql = "UPDATE users" + " SET "
+					+ " khoatk ='" + khoaTK + "'"
+					+ " WHERE id='"+ id_user+ "'"; 
+			System.out.println(sql);
+			statement.executeUpdate(sql);
+			return true;
+		}
+		catch (Exception e) {
+			// TODO: handle exception
+		}
+		return false;
+	}
 
 
 }

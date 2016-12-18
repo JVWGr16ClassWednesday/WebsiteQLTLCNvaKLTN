@@ -53,7 +53,7 @@ public class SuaDeTaiServlet extends HttpServlet {
 					if(!item.isFormField()){
 						String name = new File(item.getName()).getName();
 						name_file = name;
-						System.out.println("----->abc" + name_file);
+//						System.out.println("----->abc" + name_file);
 						item.write( new File(UPLOAD_DIRECTORY + File.separator + name));
 
 					}
@@ -66,7 +66,7 @@ public class SuaDeTaiServlet extends HttpServlet {
 				Connection connection = ConnectionDB.getConnection();
 				statement = connection.createStatement();
 				String tendt = map.get("tendetai_them"); 
-				System.out.println(tendt);
+//				System.out.println(tendt);
 				
 				String updateTableSQL = "UPDATE detai" + " SET "
 						+ "tendt = '"+ map.get("tendetai_them")+"'" + ","
