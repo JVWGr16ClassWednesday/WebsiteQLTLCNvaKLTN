@@ -108,18 +108,20 @@ public class QuanLyTaiKhoan {
 		
 	}
 	
-	public static int KiemTraDangNhap(String username, String password){
+	public static int[] KiemTraDangNhap(String username, String password){
 		Statement statement = null;
 		int res = -1;
+		int khoa_id = -1;
 		try (Connection connection = ConnectionDB.getConnection()) {
 			statement = connection.createStatement();
 			
-			String sql = "SELECT accessright FROM users WHERE username ='" + username + "' and password= '" + password + "'" ;
+			String sql = "SELECT accessright,khoatk FROM users WHERE username ='" + username + "' and password= '" + password + "'" ;
 //			System.out.println(sql);
 			ResultSet resultSet = statement.executeQuery(sql);
 			while (resultSet.next()){
 
 				res = resultSet.getInt("accessright");
+				khoa_id = resultSet.getInt("khoatk");
 				statement.close();
 			}
 //			System.out.println(sql);
@@ -127,7 +129,9 @@ public class QuanLyTaiKhoan {
 		catch (Exception e) {
 			// TODO: handle exception
 		}
-		return res;
+		int list_res[] = {res, khoa_id};
+		
+		return list_res;
 	}
 	 // ham khoa tai khoan
 	public static boolean Khoataikhoan(int id_user, int khoaTK){

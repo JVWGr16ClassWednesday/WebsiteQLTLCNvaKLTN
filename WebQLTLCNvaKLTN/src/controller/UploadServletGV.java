@@ -52,12 +52,18 @@ public class UploadServletGV extends HttpServlet {
 		
 		String type=request.getParameter("file");
 		String name=request.getParameter("folder");
+		System.out.println(name);
 		
 		boolean isMultipart = ServletFileUpload.isMultipartContent(request);
 		String filePath1;
 		int maxFileSize = 5000*1024;
 		int maxMemSize = 5*1024;
+		
+		//String root = getServletContext().getRealPath("/");
+		//String UPLOAD_DIRECTORY = root + "SourceFile";
+		
 		 filePath1 = getServletContext().getInitParameter("file_upload");
+		 System.out.println("file path 1" + filePath1);
 		 String filePath = filePath1+name;
 		 response.setContentType("text/html");
 		 PrintWriter out = response.getWriter();
@@ -95,6 +101,7 @@ public class UploadServletGV extends HttpServlet {
 						 fi.write(file);
 						
 						 out.println ("<html><body><script>alert('upload thanh cong!');</script></body></html>");
+						 response.sendRedirect("DanhSachTaiKhoanGV.jsp");
 						 
 						 file = new File(fileName);
 						 try{

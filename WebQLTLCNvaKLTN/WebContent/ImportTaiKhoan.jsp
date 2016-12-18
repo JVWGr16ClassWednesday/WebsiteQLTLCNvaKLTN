@@ -41,7 +41,7 @@
                         <input class="button" type="submit" name="Submit" value="Upload files"/>
                         <br />
                         <br />
-                        <a href="DanhSachTaiKhoanGiangVienDuocImport.jsp" class="btn btn-primary">Tạo Tài khoản</a>
+                        <!-- <a href="DanhSachTaiKhoanGiangVienDuocImport.jsp" class="btn btn-primary">Tạo Tài khoản</a> -->
                         </form>
                     </div>
                 </div>
@@ -52,10 +52,10 @@
                     <form name="form2" id="form2" action="Upload1" method="post" enctype="multipart/form-data">
                      <label>Import tài khoản Sinh Viên</label>
                         <input type="file" name="file" multiple/>
-                        <input class="button" type="submit" name="Submit" value="Upload files"/>
+                        <input class="button" type="submit" name="Submit" value="Tạo Tài Khoản"/>
                         <br />
                         <br />
-                        <a href="DanhSachTaiKhoanSinhVienDuocImport.jsp" class="btn btn-primary">Tạo Tài khoản</a>
+                        <!-- <a href="DanhSachTaiKhoanSinhVienDuocImport.jsp" class="btn btn-primary">Tạo Tài khoản</a> -->
                        </form>
                     </div>
                 </div>

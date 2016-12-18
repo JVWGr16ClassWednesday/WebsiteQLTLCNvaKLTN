@@ -14,11 +14,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
+import service.QuanLyDeTai;
 import utils.ConnectionDB;
 
 /**
@@ -59,6 +61,8 @@ public class ThemDeTaiServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		HttpSession session = request.getSession();
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
 		String root = getServletContext().getRealPath("/");
@@ -87,6 +91,7 @@ public class ThemDeTaiServlet extends HttpServlet {
 				}
 				System.out.println(name_file);
 				System.out.println(map.get("tendt"));
+				String tendetai = convertFromUTF8(map.get("tendt"));
 				convertFromUTF8(map.get("tendt"));
 				System.out.println(map.get("motadt"));
 				System.out.println(map.get("selloaidt"));
@@ -99,15 +104,25 @@ public class ThemDeTaiServlet extends HttpServlet {
 						+ "','" +  map.get("masvnt") + "','" +  convertFromUTF8(map.get("thanhvien")) + "','" +  map.get("masvtv") + "','" +  convertFromUTF8(map.get("gvhd")) + "','" 
 						+  map.get("idgvhd") + "','" +  convertFromUTF8(map.get("gvpb")) + "','" +  map.get("idgvpb") + "','" +  map.get("score") + "','" +  map.get("year") 
 						+ "','" + name_file + "')");
-				
-				
-				if(i>0){
-					response.sendRedirect("XemDanhSachDeTai.jsp");
-				}
-				else
+				if(QuanLyDeTai.check_tendetai(tendetai))
+				{
+					session.removeAttribute("error");
+					session.setAttribute("error", true);
 					response.sendRedirect("ThemDeTai.jsp");
-
-				
+				}
+				else {
+					if(i>0){
+						
+						response.sendRedirect("XemDanhSachDeTai.jsp");
+						session.removeAttribute("error");
+						session.setAttribute("error", false);
+					}
+					else
+						response.sendRedirect("ThemDeTai.jsp");
+						session.removeAttribute("error");
+						session.setAttribute("error", true);
+					
+				}
 
 				//File uploaded successfully
 				request.setAttribute("message", "File Uploaded Successfully");

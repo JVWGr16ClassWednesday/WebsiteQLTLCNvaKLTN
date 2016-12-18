@@ -52,6 +52,10 @@
 					                <label for="id">Tên đề tài:</label>
 					                <input type="text" class="form-control" name="tendt" id="tendt" required >
 					            </div>
+					            <c:set var="er" value='<%=session.getAttribute("error")%>'></c:set>
+		        					<c:if test="${er == true }">
+		            					<c:out value="Đề tài này đã tồn tại!! Vui lòng nhập lại tên đề tài khác" />
+		       						 </c:if>
 
 					            <div class="form-group">
 					            	<label for="inputlg">Mô tả đề tài:</label>

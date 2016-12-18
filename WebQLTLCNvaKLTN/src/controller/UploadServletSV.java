@@ -95,6 +95,7 @@ public class UploadServletSV extends HttpServlet {
 						 fi.write(file);
 						
 						 out.println ("<html><body><script>alert('upload thanh cong!');</script></body></html>");
+						 response.sendRedirect("DanhSachTaiKhoanSV.jsp");
 						 
 						 file = new File(fileName);
 						 try{

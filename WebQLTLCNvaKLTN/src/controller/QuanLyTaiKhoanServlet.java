@@ -62,24 +62,28 @@ public class QuanLyTaiKhoanServlet extends HttpServlet {
 //		System.out.println(btnsua);
 		
 		
-//		
-		/*if(request.getParameter("value_btnkhoa") == "2"){
-			System.out.println("==============cái quần đùi");
-			if(QuanLyTaiKhoan.Khoataikhoan(Integer.parseInt(user_id_khoa), 1))
+//		//neu value_btnkhoa ==1 thì tai khoan bị khoa, set cho no bị khoa
+		System.out.println("value_btnKhoa " + request.getParameter("value_btnkhoa"));
+		if(request.getParameter("value_btnkhoa").equals("Khoa")){
+			
+			if(QuanLyTaiKhoan.Khoataikhoan(Integer.parseInt(user_id_khoa), 2))
 			{
+				System.out.println("khoa tai khoản");
 				response.sendRedirect("DanhSachTaiKhoanGV.jsp");
 			}
 		}
+		//neu value_btnkhoa ==2 thì thuc hien mo khoa tai khoan
 		else{
-			System.out.println("==============cái quần đùi");
+			System.out.println("==============cái quần đùi 2");
 			//QuanLyTaiKhoan.Khoataikhoan(Integer.parseInt(user_id_khoa), 2);
-			if(QuanLyTaiKhoan.Khoataikhoan(Integer.parseInt(user_id_khoa), 2))
+			if(QuanLyTaiKhoan.Khoataikhoan(Integer.parseInt(user_id_khoa), 1))
 			{
+				System.out.println("mở khoa tai khoản");
 				response.sendRedirect("DanhSachTaiKhoanGV.jsp");
 			}
 			
-		}*/
-		
+		}
+	
 		if (request.getParameter("btnxoa") != null) {
 			
 			System.out.println("xóa tài khoản");

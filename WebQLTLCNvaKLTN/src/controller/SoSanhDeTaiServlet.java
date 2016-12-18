@@ -87,6 +87,7 @@ public class SoSanhDeTaiServlet extends HttpServlet {
 
 				}
 				else {
+					//search full text
 					String new_sql = "SELECT * FROM detai WHERE MATCH(motadt) AGAINST ('" + (convertFromUTF8(mota)) + "'"+" IN NATURAL LANGUAGE MODE)";
 
 			    	//ket qua cua cau truy van duoc luu vao results

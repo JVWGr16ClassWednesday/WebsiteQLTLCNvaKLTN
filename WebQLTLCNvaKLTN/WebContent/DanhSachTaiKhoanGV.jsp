@@ -9,7 +9,7 @@
 <sql:setDataSource driver="com.mysql.jdbc.Driver"
 	url="jdbc:mysql://localhost/projectweb" user="root" password="root" />
 <sql:query var="items"
-	sql="SELECT id, username,password,myname,accessright,masv FROM users WHERE accessright='1'" />
+	sql="SELECT id, username,password,myname,accessright,masv, khoatk FROM users WHERE accessright='1'" />
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -34,28 +34,29 @@
 	}
 </script>
 
-<%-- <script>
+<script>
 	function show_id(user_id) {
 		console.log(user_id);
-		document.getElementById('user_id').value = user_id;
+		
 	}
-</script> --%>
+</script> 
 
 
 <script>
-	function change_icon() {
-		var btnKhoa = document.getElementById("id_khoa");
+	function change_icon(id) {
+		document.getElementById('user_id').value = id;
+		var btnKhoa = document.getElementById("id_khoa_" + id);
 		//console.log('btnKhoa.value');
-		console.log(btnKhoa.innerHTML);
-		console.log(btnKhoa.innerText);
+		console.log("innerHTML " + btnKhoa.innerHTML);
+		console.log("innerText " +btnKhoa.innerText);
 		
-		if (btnKhoa.innerText == 'Khóa' &&  btnKhoa.innerHTML == '<span class="fa fa-unlock" aria-hidden="true"></span> Khóa') {
+		if (btnKhoa.innerText == ' Khóa') {
 			btnKhoa.innerHTML = '<span class="fa fa-lock" aria-hidden="true"></span> Mở khóa'
-			//document.getElementById('value_btnkhoa').value = '1';
+			document.getElementById('value_btnkhoa').value = 'Khoa';
 		}
 		else {
 			btnKhoa.innerHTML = '<span class="fa fa-unlock" aria-hidden="true"></span> Khóa'
-			//document.getElementById('value_btnkhoa').value = '2';
+			document.getElementById('value_btnkhoa').value = 'Mo khoa';
 		}
 		//console.log(document.getElementById('value_btnkhoa').value);
 	}
@@ -110,12 +111,19 @@
 											<td>${row[1]}</td>
 											<td>${row[3]}</td>
 											<td class="text-center">
-												<button type="button"
+												<button type="submit"
 														name="btnkhoa"
 														class="btn btn-warning btn-xs" 
-														id="id_khoa" 
-														onclick="change_icon()">
-													<span class="fa fa-unlock" aria-hidden="true"></span> Khóa
+														id="id_khoa_${row[0]}" 
+														onclick="change_icon(${row[0]})">
+														<c:choose>
+											        		<c:when test="${row[6] == 1}">
+											        			<span class="fa fa-unlock" aria-hidden="true"></span> Khóa
+											        		</c:when>
+											        		<c:when test="${row[6] == 2}">
+											        			<span class="fa fa-lock" aria-hidden="true"></span> Mở khóa
+											        		</c:when>
+											        	</c:choose>
 												</button>
 												<button type="button" class="btn btn-info btn-xs"
 													data-toggle="modal" data-target="#modalSua"

@@ -50,6 +50,24 @@ public class QuanLyDeTai {
 		
 	}
 	
+	public static boolean check_tendetai(String tendetai){
+    	
+    	try {
+			Statement st = ConnectionDB.getConnection().createStatement();
+			String sql = "select * from detai where tendt = '"+tendetai+"'";
+			ResultSet i = st.executeQuery(sql);
+			System.out.println("sql------------->" +sql);
+			
+			while (i.next()) {
+				return true;
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+    	return false;
+}
+	
 	
 
 }
