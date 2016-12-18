@@ -40,7 +40,6 @@ INDEX VERSION 1.127+C:\Users\Phi\Documents\GitHub\WebsiteQLTLCNvaKLTN\.metadata\
 808374113.index
 985286902.index
 618970243.index
-3010812606.index
 1377252301.index
 3532424351.index
 12147830.index

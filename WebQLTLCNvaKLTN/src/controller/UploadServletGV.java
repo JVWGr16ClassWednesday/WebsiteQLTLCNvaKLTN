@@ -52,11 +52,6 @@ public class UploadServletGV extends HttpServlet {
 		
 		String type=request.getParameter("file");
 		String name=request.getParameter("folder");
-		//Prepare a database class
-	
-		//Save new test to database
-	
-		//String name=(String) request.getParameter("user");
 		
 		boolean isMultipart = ServletFileUpload.isMultipartContent(request);
 		String filePath1;
@@ -116,8 +111,6 @@ public class UploadServletGV extends HttpServlet {
 							 String acc = "1";
 							
 					            PrintWriter pw = response.getWriter(); 
-					            //String connectionURL = "jdbc:mysql://127.0.0.1:3306/newData";// newData is the database  
-					            //Connection connection;  
 					            Connection conn=null;
 					            String url="jdbc:mysql://localhost:3306/projectweb?rewriteBatchedStatements=true&relaxAutoCommit=true";
 					            String dbName="projectweb";
@@ -127,7 +120,7 @@ public class UploadServletGV extends HttpServlet {
 					            	    + " username,"
 					            	    + " password,"
 					            	    + " myname,"
-					            	    + " accessright"
+					            	    + " accessright,"
 					            	    + "masv ) VALUES (?, ?, ?, ?, ?)";
 					            Class.forName(driver).newInstance();  
 					            conn = DriverManager.getConnection(url,"root", "root");
@@ -140,8 +133,6 @@ public class UploadServletGV extends HttpServlet {
 					            pst.setString(4,acc);
 					            pst.setString(5,masv);
 					            
-
-
 					            int k = pst.executeUpdate();
 					            conn.commit(); 
 					            String msg=" ";
