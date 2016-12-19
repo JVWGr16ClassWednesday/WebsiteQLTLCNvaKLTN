@@ -176,7 +176,7 @@
 						</div>
 						<div class="modal-footer">
 							<input name="btnxoa" type="submit" class="btn btn-danger"
-								value="Xóa">
+								value="xoa">
 							<button type="submit" class="btn btn-info" data-dismiss="modal">Hủy</button>
 						</div>
 					</div>
@@ -225,7 +225,7 @@
 					
 				</div>
 				<div class="modal-footer">
-					<input type="submit" class="btn btn-primary" name="btnsua" value="Sửa"></input>
+					<input type="submit" class="btn btn-primary" name="btnsua" value="sua"></input>
 					<button type="button" class="btn btn-danger" data-dismiss="modal">Đóng</button>
 				</div>
 			</div>

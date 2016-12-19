@@ -45,25 +45,23 @@ public class QuanLyTaiKhoanServlet extends HttpServlet {
 		String row_id = request.getParameter("row_id");
 		String user_id_khoa = request.getParameter("user_id");
 		String btnkhoa = request.getParameter("value_btnkhoa");
-		System.out.println("value btn khoa: "+ btnkhoa);
-		System.out.println("user id khoa: "+ user_id_khoa);
 		
 		String user_id = request.getParameter("id_user");
 		String name = request.getParameter("tensua");
 		String email = request.getParameter("emailsua");
 		String password =request.getParameter("passsua");
 		String masv = request.getParameter("masvsua");
+		String access = request.getParameter("");
 	
 		
 		String btnxoa = request.getParameter("btnxoa");
-//		System.out.println(btnxoa);
+		System.out.println(btnxoa);
 		
 		String btnsua = request.getParameter("btnsua");
 //		System.out.println(btnsua);
 		
 		
 //		//neu value_btnkhoa ==1 thì tai khoan bị khoa, set cho no bị khoa
-		System.out.println("value_btnKhoa " + request.getParameter("value_btnkhoa"));
 		if(request.getParameter("value_btnkhoa").equals("Khoa")){
 			
 			if(QuanLyTaiKhoan.Khoataikhoan(Integer.parseInt(user_id_khoa), 2))
@@ -73,9 +71,7 @@ public class QuanLyTaiKhoanServlet extends HttpServlet {
 			}
 		}
 		//neu value_btnkhoa ==2 thì thuc hien mo khoa tai khoan
-		else{
-			System.out.println("==============cái quần đùi 2");
-			//QuanLyTaiKhoan.Khoataikhoan(Integer.parseInt(user_id_khoa), 2);
+		else if(request.getParameter("value_btnkhoa").equals("Mo khoa")){
 			if(QuanLyTaiKhoan.Khoataikhoan(Integer.parseInt(user_id_khoa), 1))
 			{
 				System.out.println("mở khoa tai khoản");
@@ -84,7 +80,7 @@ public class QuanLyTaiKhoanServlet extends HttpServlet {
 			
 		}
 	
-		if (request.getParameter("btnxoa") != null) {
+		if (request.getParameter("btnxoa").equals("xoa")) {
 			
 			System.out.println("xóa tài khoản");
 			int res = QuanLyTaiKhoan.KiemTraRole(Integer.parseInt(user_id)); 
@@ -105,9 +101,8 @@ public class QuanLyTaiKhoanServlet extends HttpServlet {
 			}
           
         }
-		// neu field khoakt ==1 , thi hong cho dang nhap, khoatk==2 thi cho dang nhap
 		
-		if(request.getParameter("btnsua") != null) {
+		if(request.getParameter("btnsua").equals("sua")) {
 			System.out.println("sửa tài khoản");
         	Users user = new Users();
         	user.setId(Integer.parseInt(row_id));

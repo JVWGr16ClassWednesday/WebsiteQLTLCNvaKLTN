@@ -32,17 +32,30 @@
 		document.getElementById('id_user').value = id_user;
 	}
 </script>
-<!-- <script>
-	function foo()
-	{
-	   alert("Submit button clicked!");
-	   return true;
+<script>
+	function change_icon(id) {
+		document.getElementById('user_id').value = id;
+		var btnKhoa = document.getElementById("id_khoa_" + id);
+		//console.log('btnKhoa.value');
+		console.log("innerHTML " + btnKhoa.innerHTML);
+		console.log("innerText " +btnKhoa.innerText);
+		
+		if (btnKhoa.innerText == ' Khóa') {
+			btnKhoa.innerHTML = '<span class="fa fa-lock" aria-hidden="true"></span> Mở khóa'
+			document.getElementById('value_btnkhoa').value = 'Khoa';
+		}
+		else {
+			btnKhoa.innerHTML = '<span class="fa fa-unlock" aria-hidden="true"></span> Khóa'
+			document.getElementById('value_btnkhoa').value = 'Mo khoa';
+		}
+		//console.log(document.getElementById('value_btnkhoa').value);
 	}
-</script> -->
+</script>
 </head>
 <body>
 	<div class="container">
 	<form action="${pageContext.request.contextPath}/QuanLyTaiKhoanServlet" method="post" novalidate>
+	<input type="hidden" id="value_btnkhoa" name="value_btnkhoa">
 		<div class="row">
 				<img src="header.jpg" class="img-rounded" alt="Cinque Terre"
 					width="100%">
@@ -79,9 +92,6 @@
 								<tbody>
 									<c:forEach items="${items.rowsByIndex}" var="row">
 										<tr>
-											<%-- <c:forEach items="${row}" var="col">
-												<td>${col}</td>
-											</c:forEach> --%>
 											<td>${row[5]}</td>
 											<td>${row[1]}</td>
 											<td>${row[3]}</td>
@@ -95,6 +105,7 @@
 													data-myname="${row[3]}"
 													data-masv="${row[5]}"
 													data-password="${row[2]}"
+													data-access = "${row[4]}"
 													onclick="get_rowID('${row[0]}')" name="btnsua">
 													<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>Sửa
 												</button>
@@ -138,7 +149,7 @@
 					          </div>
 						</div>
 						<div class="modal-footer">
-							<input name="btnxoa" type="submit" class="btn btn-danger" value="Xóa">
+							<input name="btnxoa" type="submit" class="btn btn-danger" value="xoa">
 							<button type="submit" class="btn btn-info" data-dismiss="modal">Hủy</button>
 						</div>
 					</div>
@@ -173,6 +184,15 @@
 					<div class="form-group">
 						<label for="inputlg">Password:</label> <input type="text"
 							class="form-control" id="pass" name="passsua" required>
+					</div>
+					<div class="form-group">
+						<label for="inputlg">Access right:</label>
+						<br/>
+						<label for="inputlg">Quyền Giảng Viên:</label>
+						<input type="checkbox" name="accessgv" id="accessgv">
+						<br/>
+						<label for="inputlg">Quyền Sinh Viên:</label>
+						<input type="checkbox" name="accesssv" id="accesssv">
 					</div>
 				</div>
 				<div class="modal-footer">
@@ -211,11 +231,23 @@
 		  
 		  var password = button.data('password')
 		  
+		   var access = button.data('access')
+		  
 		  var modal = $(this)
 		  modal.find('.modal-body input#masv').val(masv)
 		  modal.find('.modal-body input#ten').val(myname)
 		  modal.find('.modal-body input#email').val(username)
 		  modal.find('.modal-body input#pass').val(password)
+		  if(access == 1)
+			{
+				 modal.find('.modal-body input#accessgv').prop('checked', true)
+				 modal.find('.modal-body input#accesssv').prop('checked', false)
+		  	}
+			else if (access == 2)
+			{
+				modal.find('.modal-body input#accessgv').prop('checked', false)
+				modal.find('.modal-body input#accesssv').prop('checked', true)
+			}
 		});
 	$('#modalXoa').on('show.bs.modal', function (event) {
 		  var button = $(event.relatedTarget) // Button that triggered the modal
