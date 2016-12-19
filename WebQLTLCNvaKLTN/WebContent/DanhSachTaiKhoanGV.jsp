@@ -34,12 +34,12 @@
 	}
 </script>
 
-<script>
+<%-- <script>
 	function show_id(user_id) {
 		console.log(user_id);
 		
 	}
-</script> 
+</script>  --%>
 
 
 <script>
@@ -58,8 +58,7 @@
 			btnKhoa.innerHTML = '<span class="fa fa-unlock" aria-hidden="true"></span> Khóa'
 			document.getElementById('value_btnkhoa').value = 'Mo khoa';
 		}
-		//console.log(document.getElementById('value_btnkhoa').value);
-	}
+Z	}
 </script>
 
 </head>
@@ -76,10 +75,10 @@
 			<div class="row">
 				<c:set var="accessright" value='<%=session.getAttribute("accessright") %>'></c:set>
         	<c:choose>
-        		<c:when test="${accessright == 1}">
+        		<c:when test="${accessright == 0}">
         			<tag:headerAD/>
         		</c:when>
-        		<c:when test="${accessright == 2}">
+        		<c:when test="${accessright == 1}">
         			<tag:headerGV/>
         		</c:when>
         		<c:when test="${accessright == 2}">
@@ -115,7 +114,7 @@
 														name="btnkhoa"
 														class="btn btn-warning btn-xs" 
 														id="id_khoa_${row[0]}" 
-														onclick="change_icon(${row[0]})">
+														onclick="change_icon('${row[0]}')">
 														<c:choose>
 											        		<c:when test="${row[6] == 1}">
 											        			<span class="fa fa-unlock" aria-hidden="true"></span> Khóa
@@ -159,6 +158,7 @@
 					</div>
 				</div>
 			</div>
+		
 			
 	<!-- Modal xoa tai khoan -->
 			<div class="modal fade" id="modalXoa" role="dialog">
@@ -176,16 +176,19 @@
 						</div>
 						<div class="modal-footer">
 							<input name="btnxoa" type="submit" class="btn btn-danger"
-								value="xoa">
+								value="Xóa">
 							<button type="submit" class="btn btn-info" data-dismiss="modal">Hủy</button>
 						</div>
 					</div>
 				</div>
 			</div>
 			<!-- End Modal Xóa tài khoản  -->
+			
+			</form>
 	
 	<!-- modal sua tai khoan version 2-->
-	<div class="modal fade" id="modalSua" role="dialog">
+	<form action="SuaTaiKhoanServlet" method="post">
+		<div class="modal fade" id="modalSua" role="dialog">
 		<div class="modal-dialog modal-md">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -216,21 +219,23 @@
 					<div class="form-group">
 						<label for="inputlg">Access right:</label>
 						<br/>
-						<label for="inputlg">Quyền Giảng Viên:</label>
-						<input type="checkbox" name="accessgv" id="accessgv">
-						<br/>
-						<label for="inputlg">Quyền Sinh Viên:</label>
-						<input type="checkbox" name="accesssv" id="accesssv">
+						<label><input type="radio" value="1" name="Check_Quyen" id="accessgv">&nbsp;Quyền Giảng Viên</label>
+	                        <br />
+	                        <br />
+	                    <label><input type="radio" value="2" name="Check_Quyen" id="accesssv">&nbsp;Quyền Sinh Viên</label>
 					</div>
 					
 				</div>
 				<div class="modal-footer">
-					<input type="submit" class="btn btn-primary" name="btnsua" value="sua"></input>
+					<input type="submit" class="btn btn-primary" name="btnsua" id="btnsua" value="Sửa"></input>
 					<button type="button" class="btn btn-danger" data-dismiss="modal">Đóng</button>
 				</div>
 			</div>
 		</div>
 	</div>
+	
+	</form>
+	
 	
 	<div class="container">
 		<div class="row"></div>
@@ -242,7 +247,7 @@
 				TP. Hồ Chí Minh</h5>
 		</div>
 	</div>
-	</form>
+	
 	</div>
 	
 	

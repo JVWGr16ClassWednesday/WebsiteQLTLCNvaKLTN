@@ -40,15 +40,15 @@ public class KiemTraDangNhapServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		String name = request.getParameter("txtTenTaiKhoanDN");
-		System.out.println(name);
+//		System.out.println(name);
 		String pass = request.getParameter("txtMatKhauDN");
-		System.out.println(pass);
+//		System.out.println(pass);
 		int result[] = QuanLyTaiKhoan.KiemTraDangNhap(name, pass);
-		if (result[0] > 0){
+		if (result[0] >= 0){
 			session.removeAttribute("error");
 			session.setAttribute("error", false);
 			session.setAttribute("accessright", result[0]);
-			if(result[1] == 2){
+			if(result[1] == 2 || result[0] == 0){
 				session.setAttribute("khoatk", result[1]);
 				response.sendRedirect("ChucNang.jsp");
 				

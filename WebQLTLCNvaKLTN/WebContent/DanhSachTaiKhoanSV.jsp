@@ -1,6 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql"%>
-<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ page language="java" contentType="text/html; charset=utf-8"
+	pageEncoding="utf-8"%>
 <%@ taglib uri="/WEB-INF/tlds/taglib.tld" prefix="tag"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="s" %>
@@ -8,7 +9,7 @@
 <sql:setDataSource driver="com.mysql.jdbc.Driver"
 	url="jdbc:mysql://localhost/projectweb" user="root" password="root" />
 <sql:query var="items"
-	sql="SELECT id, username,password,myname,accessright,masv FROM users WHERE accessright='2'" />
+	sql="SELECT id, username,password,myname,accessright,masv, khoatk FROM users WHERE accessright='2'" />
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -32,6 +33,15 @@
 		document.getElementById('id_user').value = id_user;
 	}
 </script>
+
+<%-- <script>
+	function show_id(user_id) {
+		console.log(user_id);
+		
+	}
+</script>  --%>
+
+
 <script>
 	function change_icon(id) {
 		document.getElementById('user_id').value = id;
@@ -48,14 +58,15 @@
 			btnKhoa.innerHTML = '<span class="fa fa-unlock" aria-hidden="true"></span> Khóa'
 			document.getElementById('value_btnkhoa').value = 'Mo khoa';
 		}
-		//console.log(document.getElementById('value_btnkhoa').value);
-	}
+Z	}
 </script>
+
 </head>
 <body>
 	<div class="container">
 	<form action="${pageContext.request.contextPath}/QuanLyTaiKhoanServlet" method="post" novalidate>
-	<input type="hidden" id="value_btnkhoa" name="value_btnkhoa">
+		<input type="hidden" id="user_id" name="user_id">
+		<input type="hidden" id="value_btnkhoa" name="value_btnkhoa">
 		<div class="row">
 				<img src="header.jpg" class="img-rounded" alt="Cinque Terre"
 					width="100%">
@@ -64,10 +75,10 @@
 			<div class="row">
 				<c:set var="accessright" value='<%=session.getAttribute("accessright") %>'></c:set>
         	<c:choose>
-        		<c:when test="${accessright == 1}">
+        		<c:when test="${accessright == 0}">
         			<tag:headerAD/>
         		</c:when>
-        		<c:when test="${accessright == 2}">
+        		<c:when test="${accessright == 1}">
         			<tag:headerGV/>
         		</c:when>
         		<c:when test="${accessright == 2}">
@@ -92,12 +103,26 @@
 								<tbody>
 									<c:forEach items="${items.rowsByIndex}" var="row">
 										<tr>
+											<%-- <c:forEach items="${row}" var="col">
+												<td>${col}</td>
+											</c:forEach> --%>
 											<td>${row[5]}</td>
 											<td>${row[1]}</td>
 											<td>${row[3]}</td>
 											<td class="text-center">
-												<button type="button" class="btn btn-warning btn-xs">
-													<span class="fa fa-unlock" aria-hidden="true"></span> Khóa
+												<button type="submit"
+														name="btnkhoa"
+														class="btn btn-warning btn-xs" 
+														id="id_khoa_${row[0]}" 
+														onclick="change_icon('${row[0]}')">
+														<c:choose>
+											        		<c:when test="${row[6] == 1}">
+											        			<span class="fa fa-unlock" aria-hidden="true"></span> Khóa
+											        		</c:when>
+											        		<c:when test="${row[6] == 2}">
+											        			<span class="fa fa-lock" aria-hidden="true"></span> Mở khóa
+											        		</c:when>
+											        	</c:choose>
 												</button>
 												<button type="button" class="btn btn-info btn-xs"
 													data-toggle="modal" data-target="#modalSua"
@@ -133,10 +158,11 @@
 					</div>
 				</div>
 			</div>
+		
 			
 	<!-- Modal xoa tai khoan -->
-	<div class="modal fade" id="modalXoa" role="dialog">
-			<div class="modal-dialog">
+			<div class="modal fade" id="modalXoa" role="dialog">
+				<div class="modal-dialog">
 					<div class="modal-content">
 						<div class="modal-header">
 							<button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -146,19 +172,23 @@
 							<div class="form-group">
 								<input type="hidden" id="id_user" name="id_user">
 								<h5 class="modal-title"></h5>
-					          </div>
+							</div>
 						</div>
 						<div class="modal-footer">
-							<input name="btnxoa" type="submit" class="btn btn-danger" value="xoa">
+							<input name="btnxoa" type="submit" class="btn btn-danger"
+								value="Xóa">
 							<button type="submit" class="btn btn-info" data-dismiss="modal">Hủy</button>
 						</div>
 					</div>
 				</div>
-	</div>
-	<!-- End Modal Xóa tài khoản  -->
+			</div>
+			<!-- End Modal Xóa tài khoản  -->
+			
+			</form>
 	
 	<!-- modal sua tai khoan version 2-->
-	<div class="modal fade" id="modalSua" role="dialog">
+	<form action="SuaTaiKhoanServlet" method="post">
+		<div class="modal fade" id="modalSua" role="dialog">
 		<div class="modal-dialog modal-md">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -168,7 +198,7 @@
 				<div class="modal-body">
 					<input type="hidden" id="row_id" name="row_id">
 					<div class="form-group">
-						<label for="id">Mã SV</label> <input type="text"
+						<label for="id">Mã GV</label> <input type="text"
 							class="form-control" id="masv" name="masvsua" required>
 					</div>
 					<div class="form-group">
@@ -185,23 +215,27 @@
 						<label for="inputlg">Password:</label> <input type="text"
 							class="form-control" id="pass" name="passsua" required>
 					</div>
+					
 					<div class="form-group">
 						<label for="inputlg">Access right:</label>
 						<br/>
-						<label for="inputlg">Quyền Giảng Viên:</label>
-						<input type="checkbox" name="accessgv" id="accessgv">
-						<br/>
-						<label for="inputlg">Quyền Sinh Viên:</label>
-						<input type="checkbox" name="accesssv" id="accesssv">
+						<label><input type="radio" value="1" name="Check_Quyen" id="accessgv">&nbsp;Quyền Giảng Viên</label>
+	                        <br />
+	                        <br />
+	                    <label><input type="radio" value="2" name="Check_Quyen" id="accesssv">&nbsp;Quyền Sinh Viên</label>
 					</div>
+					
 				</div>
 				<div class="modal-footer">
-					<input type="submit" class="btn btn-primary" name="btnsua" value="Sửa"></input>
+					<input type="submit" class="btn btn-primary" name="btnsua" id="btnsua" value="Sửa"></input>
 					<button type="button" class="btn btn-danger" data-dismiss="modal">Đóng</button>
 				</div>
 			</div>
 		</div>
 	</div>
+	
+	</form>
+	
 	
 	<div class="container">
 		<div class="row"></div>
@@ -213,7 +247,7 @@
 				TP. Hồ Chí Minh</h5>
 		</div>
 	</div>
-	</form>
+	
 	</div>
 	
 	
@@ -231,9 +265,11 @@
 		  
 		  var password = button.data('password')
 		  
-		   var access = button.data('access')
-		  
-		  var modal = $(this)
+		 var access = button.data('access')
+		 
+		 console.log(access)
+		
+		  var modal = $(this)	
 		  modal.find('.modal-body input#masv').val(masv)
 		  modal.find('.modal-body input#ten').val(myname)
 		  modal.find('.modal-body input#email').val(username)

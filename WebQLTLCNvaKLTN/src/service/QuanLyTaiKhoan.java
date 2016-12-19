@@ -21,7 +21,7 @@ public class QuanLyTaiKhoan {
 			String sql = "DELETE FROM users WHERE id='" + maGV + "'";
 //			System.out.println(sql);
 			statement.execute(sql);
-//			statement.close();
+			statement.close();
 			
 			return true;
 		}
@@ -62,11 +62,12 @@ public class QuanLyTaiKhoan {
 					+ " username = '"+ user.getUsername()+"'" + ","
 					+ " password = '" + user.getPassword()+"'" + ","
 					+ " myname ='" +user.getMyname()+"'" + ","
-					+ " masv ='" +user.getMasv()+ "'"
+					+ " masv ='" +user.getMasv()+ "'" + ","
+					+ "accessright='" + user.getAccessright() + "'"
 					+ " WHERE id='"+ user.getId()+"'"; 
-//			System.out.println(sql);
+			System.out.println(sql);
 			statement.executeUpdate(sql);
-//			System.out.println("update thanh cong");
+			System.out.println("update thanh cong");
 			return true;
 		}
 		catch (Exception e) {

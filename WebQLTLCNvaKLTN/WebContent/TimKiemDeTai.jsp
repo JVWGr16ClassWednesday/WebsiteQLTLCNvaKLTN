@@ -38,10 +38,10 @@
         <div class="row">
             <c:set var="accessright" value='<%=session.getAttribute("accessright") %>'></c:set>
         	<c:choose>
-        		<c:when test="${accessright == 1}">
+        		<c:when test="${accessright == 0}">
         			<tag:headerAD/>
         		</c:when>
-        		<c:when test="${accessright == 2}">
+        		<c:when test="${accessright == 1}">
         			<tag:headerGV/>
         		</c:when>
         		<c:when test="${accessright == 2}">

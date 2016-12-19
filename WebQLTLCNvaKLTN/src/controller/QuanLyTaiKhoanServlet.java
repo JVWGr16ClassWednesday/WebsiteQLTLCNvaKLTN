@@ -42,46 +42,64 @@ public class QuanLyTaiKhoanServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
-		String row_id = request.getParameter("row_id");
+		//String row_id = request.getParameter("row_id");
 		String user_id_khoa = request.getParameter("user_id");
-		String btnkhoa = request.getParameter("value_btnkhoa");
+		//String btnkhoa = request.getParameter("value_btnkhoa");
 		
 		String user_id = request.getParameter("id_user");
-		String name = request.getParameter("tensua");
-		String email = request.getParameter("emailsua");
-		String password =request.getParameter("passsua");
-		String masv = request.getParameter("masvsua");
-		String access = request.getParameter("");
+		//String name = request.getParameter("tensua");
+		//String email = request.getParameter("emailsua");
+		//String password =request.getParameter("passsua");
+		//String masv = request.getParameter("masvsua");
+		//String access = request.getParameter("Check_Quyen");
+		
+//		System.out.println("access: " + access);
 	
 		
 		String btnxoa = request.getParameter("btnxoa");
-		System.out.println(btnxoa);
+//		System.out.println("nội dung button xóa---->" + btnxoa);
 		
 		String btnsua = request.getParameter("btnsua");
-//		System.out.println(btnsua);
+//		System.out.println("nội dung button sửa--->" + btnsua);
+		
+		
+//		System.out.println("nội dung button khóa---->"+ btnkhoa);
+		
 		
 		
 //		//neu value_btnkhoa ==1 thì tai khoan bị khoa, set cho no bị khoa
 		if(request.getParameter("value_btnkhoa").equals("Khoa")){
-			
+			int res = QuanLyTaiKhoan.KiemTraRole(Integer.parseInt(user_id_khoa));
 			if(QuanLyTaiKhoan.Khoataikhoan(Integer.parseInt(user_id_khoa), 2))
 			{
-				System.out.println("khoa tai khoản");
-				response.sendRedirect("DanhSachTaiKhoanGV.jsp");
+				if (res==1) {
+					response.sendRedirect("DanhSachTaiKhoanGV.jsp");
+				}
+				if (res==2) {
+					response.sendRedirect("DanhSachTaiKhoanSV.jsp");
+				}
+				
+				//System.out.println("khoa tai khoản");
+				//response.sendRedirect("DanhSachTaiKhoanGV.jsp");
 			}
 		}
 		//neu value_btnkhoa ==2 thì thuc hien mo khoa tai khoan
 		else if(request.getParameter("value_btnkhoa").equals("Mo khoa")){
+			int res = QuanLyTaiKhoan.KiemTraRole(Integer.parseInt(user_id_khoa));
 			if(QuanLyTaiKhoan.Khoataikhoan(Integer.parseInt(user_id_khoa), 1))
 			{
-				System.out.println("mở khoa tai khoản");
-				response.sendRedirect("DanhSachTaiKhoanGV.jsp");
+				if (res==1) {
+					response.sendRedirect("DanhSachTaiKhoanGV.jsp");
+				}
+				if (res==2) {
+					response.sendRedirect("DanhSachTaiKhoanSV.jsp");
+				}
+//				System.out.println("mở khoa tai khoản");
+//				response.sendRedirect("DanhSachTaiKhoanGV.jsp");
 			}
 			
 		}
-	
-		if (request.getParameter("btnxoa").equals("xoa")) {
-			
+		else if (request.getParameter("btnxoa").equals("Xóa")) {
 			System.out.println("xóa tài khoản");
 			int res = QuanLyTaiKhoan.KiemTraRole(Integer.parseInt(user_id)); 
 			System.out.println(res);
@@ -93,42 +111,15 @@ public class QuanLyTaiKhoanServlet extends HttpServlet {
 				}
 				
 			}
-			if(res == 2)
+			else if(res == 2)
 			{
 				if(QuanLyTaiKhoan.XoaTaiKhoan(Integer.parseInt(user_id))){
 					response.sendRedirect("DanhSachTaiKhoanSV.jsp");
 				}
 			}
-          
-        }
+		}
 		
-		if(request.getParameter("btnsua").equals("sua")) {
-			System.out.println("sửa tài khoản");
-        	Users user = new Users();
-        	user.setId(Integer.parseInt(row_id));
-    		user.setMyname(name);
-    		user.setUsername(email);
-    		user.setPassword(password);
-    		user.setMasv(masv);
-			int res = QuanLyTaiKhoan.KiemTraRole(Integer.parseInt(row_id)); 
-			System.out.println(res);
-			if (res == 1)
-			{
-				if(QuanLyTaiKhoan.ChinhSuaTaiKhoan(user)){
-	        		response.sendRedirect("DanhSachTaiKhoanGV.jsp");
-	        		
-	        	}
-				
-			}
-			if(res == 2)
-			{
-				if(QuanLyTaiKhoan.ChinhSuaTaiKhoan(user)){
-	        		response.sendRedirect("DanhSachTaiKhoanSV.jsp");
-	        		
-	        	}
-			}
-        }
-
+		
 	}
 
 }
