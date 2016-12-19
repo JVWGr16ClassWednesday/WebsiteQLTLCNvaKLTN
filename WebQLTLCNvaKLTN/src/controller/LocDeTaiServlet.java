@@ -5,7 +5,9 @@ import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -71,42 +73,31 @@ public class LocDeTaiServlet extends HttpServlet {
 		String res = "";
 		try (Connection connection = ConnectionDB.getConnection()) {
 			statement = connection.createStatement();
-			
-			// tim mo ta de tai cua tat ca ca de tai da co trong database
-			String sql = "SELECT motadt FROM detai";
-			// tao mot bien resulset de luu lai ket qua cua cau truy van
+			String sql = "SELECT * FROM detai WHERE MATCH(motadt) AGAINST ('" + mota + "'"+" IN NATURAL LANGUAGE MODE)";
+			List<DeTai> deTais = new ArrayList<DeTai>();
 			ResultSet resultSet = statement.executeQuery(sql);
 			while (resultSet.next()){
 				
-				//voi tung ket qua duoc tra ve, lay noi dung can lay dua vao bien res
-				res = resultSet.getString("motadt");
-				//dua hai chuoi can so sanh vao hai list co kieu dl la char.
-				char[] firstString = convertFromUTF8(mota).toLowerCase().toCharArray();
-			    char[] secondString = res.toLowerCase().toCharArray();
-			    
-			    //sap xep cac gia tri trong tung list theo gia tri tu thap den cao  
-			    Arrays.sort(firstString);
-			    Arrays.sort(secondString);
-			    //kiem tra neu hai chuoi nay giong nhau
-			    if (Arrays.equals(firstString, secondString) == true) {
-			    	int res_1;
-			    	//neu giong nhau thi thuc hien truy van tim id cua nhung de tai co phan mo ta giong nhu nguoi dung nhap tren text
-			    	String test_sql = "SELECT id FROM detai WHERE motadt LIKE" + "'%" + res + "%'";
-			    	//ket qua cua cau truy van duoc luu vao results
-					ResultSet results = statement.executeQuery(test_sql);
-					//trong tung ket qua duoc tra ve
-					while (results.next()){
-						res_1 = results.getInt("id");
-						request.setAttribute("name", res_1);
-						request.getRequestDispatcher("Loc.jsp").forward(request, response);
+						DeTai detai = new DeTai();
+						detai.setTendt(resultSet.getString("tendt"));
+						detai.setMotadt(resultSet.getString("motadt"));
+						detai.setLoaidt(resultSet.getString("loaidt"));				
+						detai.setTruongnhom(resultSet.getString("truongnhom"));
+						detai.setMasvtn(resultSet.getInt("masvnt"));
+						detai.setThanhvien(resultSet.getString("thanhvien"));
+						detai.setMasvtv(resultSet.getInt("masvtv"));
+						detai.setGvhd(resultSet.getString("gvhd"));
+						detai.setMagvhd(resultSet.getInt("magvhd"));
+						detai.setGvpb(resultSet.getString("gvpb"));
+						detai.setMagvpb(resultSet.getInt("magvpb"));
+						detai.setDiem(resultSet.getFloat("diem"));
+						detai.setNam(resultSet.getInt("nam"));
+						detai.setTailieu(resultSet.getString("tailieu"));
+						deTais.add(detai);						
 					}
-
-			        System.out.println("Both the string contain same charecter");
-			    } else {
-			        System.out.println("Both the string contains different charecter");
-			    }
-				
-			}
+					
+					request.setAttribute("name", deTais);
+					request.getRequestDispatcher("Loc.jsp").forward(request, response);
 		}
 		catch (Exception e) {
 		}		

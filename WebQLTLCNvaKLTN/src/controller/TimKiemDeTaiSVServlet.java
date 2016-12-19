@@ -23,11 +23,11 @@ import utils.ConnectionDB;
 /**
  * Servlet implementation class TimKiemDeTaiServlet
  */
-@WebServlet("/TimKiemDeTaiServlet")
-public class TimKiemDeTaiServlet extends HttpServlet {
+@WebServlet("/TimKiemDeTaiSVServlet")
+public class TimKiemDeTaiSVServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
    
-    public TimKiemDeTaiServlet() {
+    public TimKiemDeTaiSVServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -84,13 +84,13 @@ public class TimKiemDeTaiServlet extends HttpServlet {
 			if (deTais.isEmpty())
 			{
 				System.out.println("khong tim duojc ket qua");
-				response.sendRedirect("TimKiemDeTai.jsp");
+				response.sendRedirect("TimKiemDeTaiSV.jsp");
 			}
 //			System.out.println(deTais.get(0).getTendt());
 			
 //			System.out.println(deTais);
 		    request.setAttribute("name", deTais);
-			request.getRequestDispatcher("TimKiemDeTai.jsp").forward(request, response);
+			request.getRequestDispatcher("TimKiemDeTaiSV.jsp").forward(request, response);
 		}
 		catch (Exception e) {
 		}		

@@ -97,6 +97,12 @@ public class ThemDeTaiServlet extends HttpServlet {
 				System.out.println(map.get("selloaidt"));
 				System.out.println(map.get("truongnhom"));
 				System.out.println(map.get("masvnt"));
+				if(QuanLyDeTai.check_tendetai(tendetai))
+				{
+					session.removeAttribute("error");
+					session.setAttribute("error", true);
+					response.sendRedirect("ThemDeTai.jsp");
+				}
 				Statement st = ConnectionDB.getConnection().createStatement();
 				int i = 0;
 				i = st.executeUpdate("insert into detai(tendt, motadt, loaidt, truongnhom, masvnt, thanhvien, masvtv, gvhd, magvhd, gvpb, magvpb, diem, nam, tailieu) "
@@ -104,25 +110,17 @@ public class ThemDeTaiServlet extends HttpServlet {
 						+ "','" +  map.get("masvnt") + "','" +  convertFromUTF8(map.get("thanhvien")) + "','" +  map.get("masvtv") + "','" +  convertFromUTF8(map.get("gvhd")) + "','" 
 						+  map.get("idgvhd") + "','" +  convertFromUTF8(map.get("gvpb")) + "','" +  map.get("idgvpb") + "','" +  map.get("score") + "','" +  map.get("year") 
 						+ "','" + name_file + "')");
-				if(QuanLyDeTai.check_tendetai(tendetai))
-				{
-					session.removeAttribute("error");
-					session.setAttribute("error", true);
-					response.sendRedirect("ThemDeTai.jsp");
-				}
-				else {
-					if(i>0){
-						
+				
+				if(i>0){
 						response.sendRedirect("XemDanhSachDeTai.jsp");
 						session.removeAttribute("error");
 						session.setAttribute("error", false);
 					}
-					else
+				else
 						response.sendRedirect("ThemDeTai.jsp");
 						session.removeAttribute("error");
 						session.setAttribute("error", true);
 					
-				}
 
 				//File uploaded successfully
 				request.setAttribute("message", "File Uploaded Successfully");

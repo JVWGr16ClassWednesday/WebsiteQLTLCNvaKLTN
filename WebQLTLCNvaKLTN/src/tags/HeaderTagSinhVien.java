@@ -18,7 +18,7 @@ public class HeaderTagSinhVien extends SimpleTagSupport{
 		out.println("                            <a href=\"TrangChu.jsp\"> Trang chủ</a>");
 		out.println("                        </li>");
 		out.println("                        <li>");
-		out.println("                        	<a href=\"XemDanhSachDeTaiSV.jsp\" >Tìm kiếm đề tài</a>");
+		out.println("                        	<a href=\"TimKiemDeTaiSV.jsp\" >Tìm kiếm đề tài</a>");
 		out.println("                        </li>");
 		out.println("                    </ul>");
 		out.println("                    <div style=\"padding-top:8px;\">");

@@ -50,7 +50,7 @@
         	</c:choose>
         </div>
         <div class="row">
-        	<form action="TimKiemDeTaiServlet" method="post">
+        	<form action="TimKiemDeTaiSVServlet" method="post">
         		<div class="panel panel-default">
                 <div class="panel-heading">Tìm kiếm đề tài</div>
                 <div class="panel-body">
@@ -175,9 +175,7 @@
 					</div>
 					<div class="form-group">
 						<label for="name">Tài liệu đính kèm:</label> 
-						<input type="hidden" id="file" name="file">
-						<a id="file_2" href="#">Tai Lieu</a>
-						<input type="file" name="file_them"/>
+						<a id="file_2" href="#" class="disabled">Tai Lieu</a>
 					</div>
 
 				</div>
@@ -188,6 +186,14 @@
 		</div>
 	</div>
 	<!-- End Modal xem thông tin chi tiết đề tài -->
+	
+	<script>
+	$(document).ready(function(){
+    	$("button").click(function(){
+        	$("a").removeAttr("href");
+    });
+});
+</script>
 	
 	<script type="text/javascript">
 	$('#XemChiTietDeTai').on('show.bs.modal', function (event) {
@@ -219,8 +225,6 @@
 		  
 		  var nam = button.data('nam')
 		  
-		  var tailieu = button.data('tailieu')
-		  console.log(tailieu)
 		  
 		 /*  var tailieu = button.data('tailieu') */
 		  var modal = $(this)
@@ -237,9 +241,6 @@
 		  modal.find('.modal-body input#idgvpb').val(magvpb)
 		  modal.find('.modal-body input#score').val(diem)
 		  modal.find('.modal-body input#year').val(nam)
-		  modal.find('.modal-body input#file').val(tailieu)
-		  console.log
-		  modal.find('.modal-body #file_2').prop('href',"DownLoadTaiLieuServlet?file="+tailieu)
 		});
 	</script>
 	
