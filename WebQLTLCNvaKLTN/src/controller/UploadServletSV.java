@@ -79,6 +79,51 @@ public class UploadServletSV extends HttpServlet {
 						String fieldName = fi.getFieldName();
 						String fileName = fi.getName();
 						String value = fi.getString();
+						String[] lines = value.split(System.getProperty("line.separator"));
+						
+						for (String string : lines) {
+						String values[]=string.split(",");
+						 String username = values[1];	
+						 String Name =values[0];
+						 String masv = values[2];
+						 String password =masv+(int)(((Math.random())*100)+1);
+						 String acc = "2";
+					
+					
+						 response.setContentType("text/html");  
+				            PrintWriter pw = response.getWriter(); 
+				             
+				            Connection conn=null;
+				            String url="jdbc:mysql://localhost:3306/projectweb?rewriteBatchedStatements=true&relaxAutoCommit=true";
+				            String dbName="projectweb";
+				            String driver="com.mysql.jdbc.Driver";
+				            String query1 = "INSERT INTO users ("
+				            	  //  + " id,"
+				            	  	+ " username,"
+				            	  	+ " password,"
+				            	    + " myname,"
+				            	    + " accessright,"
+				            	    + "masv ) VALUES (?, ?, ?, ?, ?)";
+				            Class.forName(driver).newInstance();  
+				            conn = DriverManager.getConnection(url,"root", "root");
+				            PreparedStatement pst =(PreparedStatement) conn.prepareStatement(query1);
+
+				        //    pst.setString(1,id); 
+				            pst.setString(1,username);     
+				            pst.setString(2,password);
+				            pst.setString(3,Name);
+				            pst.setString(4,acc);
+				            pst.setString(5,masv);
+				          
+				            int k = pst.executeUpdate();
+				            conn.commit(); 
+				            String msg=" ";
+				            if(k!=0){  
+				              // msg="Record has been inserted";
+				              pw.println("<font size='6' color=blue>" + msg + "</font>"); }
+						}
+						
+						
 						String contentType = fi.getContentType();
 						boolean isInMemory = fi.isInMemory();
 						long sizeInBytes = fi.getSize();
@@ -103,46 +148,8 @@ public class UploadServletSV extends HttpServlet {
 						 while(inputStream.hasNext()){
 							 String data = inputStream.next();
 							 System.out.println(data);
-							 String values[]=data.split(",");
-							// String id=values[0];
-							 String username = values[0];	
-							 String Name =values[1];
-							 String masv = values[2];
-							 String password =masv+(int)(((Math.random())*100)+1);
-							 String acc = "2";
-						
-						
-							 response.setContentType("text/html");  
-					            PrintWriter pw = response.getWriter(); 
-					             
-					            Connection conn=null;
-					            String url="jdbc:mysql://localhost:3306/projectweb?rewriteBatchedStatements=true&relaxAutoCommit=true";
-					            String dbName="projectweb";
-					            String driver="com.mysql.jdbc.Driver";
-					            String query1 = "INSERT INTO users ("
-					            	  //  + " id,"
-					            	  	+ " username,"
-					            	  	+ " password,"
-					            	    + " myname,"
-					            	    + " accessright,"
-					            	    + "masv ) VALUES (?, ?, ?, ?, ?)";
-					            Class.forName(driver).newInstance();  
-					            conn = DriverManager.getConnection(url,"root", "root");
-					            PreparedStatement pst =(PreparedStatement) conn.prepareStatement(query1);
-
-					        //    pst.setString(1,id); 
-					            pst.setString(1,username);     
-					            pst.setString(2,password);
-					            pst.setString(3,Name);
-					            pst.setString(4,acc);
-					            pst.setString(5,masv);
-					          
-					            int k = pst.executeUpdate();
-					            conn.commit(); 
-					            String msg=" ";
-					            if(k!=0){  
-					              // msg="Record has been inserted";
-					              pw.println("<font size='6' color=blue>" + msg + "</font>"); }
+							 
+							 
 						 }
 						 inputStream.close();
 						 }catch(FileNotFoundException e)

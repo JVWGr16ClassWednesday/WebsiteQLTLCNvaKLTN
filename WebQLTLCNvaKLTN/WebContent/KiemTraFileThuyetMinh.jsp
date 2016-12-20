@@ -73,8 +73,8 @@
                     <br />
                     <br />
                     <div class="table-responsive">
-                    <input type="text" value="<%=request.getAttribute("value_percen")%>">
-                    <input type="text" value="<%=request.getAttribute("value_kq")%>">
+                    <%-- <input type="text" value="<%=request.getAttribute("value_percen")%>">
+                    <input type="text" value="<%=request.getAttribute("value_kq")%>">--%>
                     <%-- <p> Message: ${message}</p> --%>
                         <table class="table table-striped table-bordered table-hover">
                             <thead>
@@ -124,8 +124,6 @@
             </div>
         </form>
         </div>
-        
-        
         <!-- Start Modal xem thông tin chi tiết đề tài -->
 	<div class="modal fade" id="XemChiTietDeTai" role="dialog">
 		<div class="modal-dialog modal-md">

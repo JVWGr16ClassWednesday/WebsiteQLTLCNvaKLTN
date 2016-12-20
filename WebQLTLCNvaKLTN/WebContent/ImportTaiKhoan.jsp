@@ -36,12 +36,11 @@
                 <div class="panel panel-default">
                     <div class="panel-body">
                     <form name="form1" id="form1" action="Upload" method="post" enctype="multipart/form-data">
-                        <label>Import tài khoản Giảng Viên</label>
+                        <label>Import tài khoản giảng viên</label>
                         <input type="file" name="file" multiple/>
-                        <input class="button" type="submit" name="Submit" value="Tạo Tài Khoản"/>
+                        <input class="button" type="submit" name="submit" value="Tạo tài khoản"/>
                         <br />
                         <br />
-                        <!-- <a href="DanhSachTaiKhoanGiangVienDuocImport.jsp" class="btn btn-primary">Tạo Tài khoản</a> -->
                         </form>
                     </div>
                 </div>
@@ -52,10 +51,9 @@
                     <form name="form2" id="form2" action="Upload1" method="post" enctype="multipart/form-data">
                      <label>Import tài khoản Sinh Viên</label>
                         <input type="file" name="file" multiple/>
-                        <input class="button" type="submit" name="Submit" value="Tạo Tài Khoản"/>
+                        <input class="button" type="submit" name="submit" value="Tạo Tài Khoản"/>
                         <br />
                         <br />
-                        <!-- <a href="DanhSachTaiKhoanSinhVienDuocImport.jsp" class="btn btn-primary">Tạo Tài khoản</a> -->
                        </form>
                     </div>
                 </div>
@@ -70,13 +68,14 @@
         </div>
     </div>
     <div class="container">
-     <div class="row">
-     </div>
-        <div id="footer">
-        <hr>
-            <h5 class="text-center text-danger">Khoa Công nghệ Thông tin - Đại học Sư phạm Kỹ thuật TP. Hồ Chí Minh</h5>
-            <h5 class="text-center text-danger">Số 1, Võ Văn Ngân, Thủ Đức, TP. Hồ Chí Minh</h5>
-        </div>
-    </div>
+		<div class="row"></div>
+		<div id="footer">
+			<hr>
+			<h5 class="text-center text-danger">Khoa Công nghệ Thông tin -
+				Đại học Sư phạm Kỹ thuật TP. Hồ Chí Minh</h5>
+			<h5 class="text-center text-danger">Số 1, Võ Văn Ngân, Thủ Đức,
+				TP. Hồ Chí Minh</h5>
+		</div>
+	</div>
 </body>
 </html>
