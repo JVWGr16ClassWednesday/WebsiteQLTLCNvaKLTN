@@ -13,23 +13,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- * Servlet implementation class DownLoadTaiLieuServlet
- */
+
 @WebServlet("/DownLoadTaiLieuServlet")
 public class DownLoadTaiLieuServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
+    
     public DownLoadTaiLieuServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
+	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
@@ -51,7 +44,9 @@ public class DownLoadTaiLieuServlet extends HttpServlet {
 		System.out.println("File location on server::"+file.getAbsolutePath());
 		ServletContext ctx = getServletContext();
 		InputStream fis = new FileInputStream(file);
+		//lấy kiểu file
 		String mimeType = ctx.getMimeType(file.getAbsolutePath());
+		System.out.println("min type" + mimeType);
 		response.setContentType(mimeType != null? mimeType:"application/octet-stream");
 		response.setContentLength((int) file.length());
 		response.setHeader("Content-Disposition", "attachment; filename=\"" + fileName + "\"");

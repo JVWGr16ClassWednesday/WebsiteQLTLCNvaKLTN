@@ -23,22 +23,18 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import service.QuanLyDeTai;
 import utils.ConnectionDB;
 
-/**
- * Servlet implementation class ThemDeTaiServlet
- */
 @WebServlet("/ThemDeTaiServlet")
 @MultipartConfig(maxFileSize = 16177215)
 public class ThemDeTaiServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
        
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
+    
     public ThemDeTaiServlet() {
         super();
-        // TODO Auto-generated constructor stub
+        
     }
+    
     public String convertFromUTF8(String s){
 	    String out = null;
 	    try {
@@ -49,17 +45,12 @@ public class ThemDeTaiServlet extends HttpServlet {
 	    return out;
 	}
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
+	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		HttpSession session = request.getSession();
@@ -67,8 +58,6 @@ public class ThemDeTaiServlet extends HttpServlet {
 		response.setCharacterEncoding("UTF-8");
 		String root = getServletContext().getRealPath("/");
 		String UPLOAD_DIRECTORY = root + "SourceFile";
-		System.out.println(UPLOAD_DIRECTORY);
-		System.out.println(root);
 		String name_file = " ";
 		
 		if(ServletFileUpload.isMultipartContent(request)){
@@ -81,7 +70,6 @@ public class ThemDeTaiServlet extends HttpServlet {
 					if(!item.isFormField()){
 						String name = new File(item.getName()).getName();
 						name_file = name;
-						System.out.println(name_file);
 						item.write( new File(UPLOAD_DIRECTORY + File.separator + name));
 						
 					}
@@ -89,39 +77,35 @@ public class ThemDeTaiServlet extends HttpServlet {
 						map.put(item.getFieldName(), item.getString());
 					}
 				}
-				System.out.println(name_file);
-				System.out.println(map.get("tendt"));
 				String tendetai = convertFromUTF8(map.get("tendt"));
 				convertFromUTF8(map.get("tendt"));
-				System.out.println(map.get("motadt"));
-				System.out.println(map.get("selloaidt"));
-				System.out.println(map.get("truongnhom"));
-				System.out.println(map.get("masvnt"));
 				if(QuanLyDeTai.check_tendetai(tendetai))
 				{
 					session.removeAttribute("error");
 					session.setAttribute("error", true);
 					response.sendRedirect("ThemDeTai.jsp");
 				}
-				Statement st = ConnectionDB.getConnection().createStatement();
-				int i = 0;
-				i = st.executeUpdate("insert into detai(tendt, motadt, loaidt, truongnhom, masvnt, thanhvien, masvtv, gvhd, magvhd, gvpb, magvpb, diem, nam, tailieu) "
-						+ "values ('" + convertFromUTF8(map.get("tendt")) + "','" + convertFromUTF8(map.get("motadt")) + "','" + convertFromUTF8(map.get("selloaidt")) + "','" +  convertFromUTF8(map.get("truongnhom"))
-						+ "','" +  map.get("masvnt") + "','" +  convertFromUTF8(map.get("thanhvien")) + "','" +  map.get("masvtv") + "','" +  convertFromUTF8(map.get("gvhd")) + "','" 
-						+  map.get("idgvhd") + "','" +  convertFromUTF8(map.get("gvpb")) + "','" +  map.get("idgvpb") + "','" +  map.get("score") + "','" +  map.get("year") 
-						+ "','" + name_file + "')");
-				
-				if(i>0){
-						response.sendRedirect("XemDanhSachDeTai.jsp");
-						session.removeAttribute("error");
-						session.setAttribute("error", false);
-					}
-				else
-						response.sendRedirect("ThemDeTai.jsp");
-						session.removeAttribute("error");
-						session.setAttribute("error", true);
+				else {
+					Statement st = ConnectionDB.getConnection().createStatement();
+					int i = 0;
+					i = st.executeUpdate("insert into detai(tendt, motadt, loaidt, truongnhom, masvnt, thanhvien, masvtv, gvhd, magvhd, gvpb, magvpb, diem, nam, tailieu) "
+							+ "values ('" + convertFromUTF8(map.get("tendt")) + "','" + convertFromUTF8(map.get("motadt")) + "','" + convertFromUTF8(map.get("selloaidt")) + "','" +  convertFromUTF8(map.get("truongnhom"))
+							+ "','" +  map.get("masvnt") + "','" +  convertFromUTF8(map.get("thanhvien")) + "','" +  map.get("masvtv") + "','" +  convertFromUTF8(map.get("gvhd")) + "','" 
+							+  map.get("idgvhd") + "','" +  convertFromUTF8(map.get("gvpb")) + "','" +  map.get("idgvpb") + "','" +  map.get("score") + "','" +  map.get("year") 
+							+ "','" + name_file + "')");
 					
-
+					if(i>0){
+							response.sendRedirect("XemDanhSachDeTai.jsp");
+							session.removeAttribute("error");
+							session.setAttribute("error", false);
+						}
+					else
+							response.sendRedirect("ThemDeTai.jsp");
+							session.removeAttribute("error");
+							session.setAttribute("error", true);
+					
+				}
+				
 				//File uploaded successfully
 				request.setAttribute("message", "File Uploaded Successfully");
 			} catch (Exception ex) {

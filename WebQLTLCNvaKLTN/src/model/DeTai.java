@@ -15,9 +15,6 @@ public class DeTai {
 	private int magvpb;
 	private float diem;
 	private String tailieu;
-	
-	
-	
 	public int getId() {
 		return id;
 	}

@@ -18,8 +18,11 @@
             <img src="header.jpg" class="img-rounded" alt="Cinque Terre" width="100%">
         </div>
         <div class="row">
+        <%--tạo một biến là accessright có giá trị được lấy từ session. --%>
         <c:set var="accessright" value='<%=session.getAttribute("accessright") %>'></c:set>
+        <%--thẻ c:choose là thẻ điều kiện, trong thẻ c:choose có thể đặt hai thẻ là <c:when> hoặc <c:otherwise> --%>
         	<c:choose>
+        		<%--Khi mà accessright la 0 thì áp dung tag của admin. tag này được khai báo trong WEBIF file tlds/taglib.tld, nội dung của tag được thể hiện ở class tag. --%>
         		<c:when test="${accessright == 0}">
         			<tag:headerAD/>
         		</c:when>

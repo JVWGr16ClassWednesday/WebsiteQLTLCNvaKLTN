@@ -65,22 +65,6 @@ public class SuaTaiKhoanServlet extends HttpServlet {
 			}
 			
 		}
-		
-			/*if (res == 1)
-			{
-				if(QuanLyTaiKhoan.ChinhSuaTaiKhoan(user)){
-	        		response.sendRedirect("DanhSachTaiKhoanGV.jsp");
-	        		
-	        	}
-				
-			}
-			if(res == 2)
-			{
-				if(QuanLyTaiKhoan.ChinhSuaTaiKhoan(user)){
-	        		response.sendRedirect("DanhSachTaiKhoanSV.jsp");
-	        		
-	        	}
-			}*/
 			
 		}
 

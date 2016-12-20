@@ -16,11 +16,9 @@ public class QuanLyDeTai {
 			String sql = "DELETE FROM detai WHERE id='" + madt + "'";
 			System.out.println(sql);
 			statement.execute(sql);
-//			statement.close();
 			return true;
 		}
 		catch (Exception e) {
-			// TODO: handle exception
 		}
 		
 		return false;
@@ -33,18 +31,13 @@ public class QuanLyDeTai {
 			statement = connection.createStatement();
 			
 			String sql = "SELECT motadt FROM detai";
-//			System.out.println(sql);
 			ResultSet resultSet = statement.executeQuery(sql);
 			while (resultSet.next()){
 
 				res = resultSet.getString("motadt");
-//				System.out.println(res);
-//				statement.close();
 			}
-//			System.out.println(sql);
 		}
 		catch (Exception e) {
-			// TODO: handle exception
 		}
 		return res;
 		
@@ -55,9 +48,7 @@ public class QuanLyDeTai {
     	try {
 			Statement st = ConnectionDB.getConnection().createStatement();
 			String sql = "select * from detai where tendt = '"+tendetai+"'";
-			ResultSet i = st.executeQuery(sql);
-			System.out.println("sql------------->" +sql);
-			
+			ResultSet i = st.executeQuery(sql);			
 			while (i.next()) {
 				return true;
 			}

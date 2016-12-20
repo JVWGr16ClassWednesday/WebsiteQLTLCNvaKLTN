@@ -29,6 +29,15 @@ public class SuaDeTaiServlet extends HttpServlet {
     public SuaDeTaiServlet() {
         super();
     }
+    public String convertFromUTF8(String s){
+	    String out = null;
+	    try {
+	        out = new String(s.getBytes("ISO-8859-1"), "UTF-8");
+	    } catch (java.io.UnsupportedEncodingException e) {
+	        return null;
+	    }
+	    return out;
+	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.getWriter().append("Served at: ").append(request.getContextPath());
@@ -50,10 +59,10 @@ public class SuaDeTaiServlet extends HttpServlet {
 				List<FileItem> multiparts = new ServletFileUpload(new DiskFileItemFactory()).parseRequest(request);
 
 				for(FileItem item : multiparts){
+					//nếu trường input có type là file
 					if(!item.isFormField()){
 						String name = new File(item.getName()).getName();
 						name_file = name;
-//						System.out.println("----->abc" + name_file);
 						item.write( new File(UPLOAD_DIRECTORY + File.separator + name));
 
 					}
@@ -65,20 +74,17 @@ public class SuaDeTaiServlet extends HttpServlet {
 				Statement statement = null;
 				Connection connection = ConnectionDB.getConnection();
 				statement = connection.createStatement();
-				String tendt = map.get("tendetai_them"); 
-//				System.out.println(tendt);
-				
 				String updateTableSQL = "UPDATE detai" + " SET "
-						+ "tendt = '"+ map.get("tendetai_them")+"'" + ","
-						+ "motadt = '" + map.get("motadt_them")+"'" + ","
-						+ "loaidt ='" + map.get("selloaidt_them")+"'" + ","
-						+ "truongnhom ='" + map.get("truongnhom_them")+"'" + ","
+						+ "tendt = '"+ convertFromUTF8(map.get("tendetai_them"))+"'" + ","
+						+ "motadt = '" + convertFromUTF8(map.get("motadt_them"))+"'" + ","
+						+ "loaidt ='" + convertFromUTF8(map.get("selloaidt_them"))+"'" + ","
+						+ "truongnhom ='" + convertFromUTF8(map.get("truongnhom_them"))+"'" + ","
 						+ "masvnt ='" + map.get("idnt_them")+"'" + ","
-						+ "thanhvien ='" + map.get("thanhvien_them")+"'" + ","
+						+ "thanhvien ='" + convertFromUTF8(map.get("thanhvien_them"))+"'" + ","
 						+ "masvtv='" + map.get("idtv_them")+"'" + ","
-						+ "gvhd ='" + map.get("gvhd_them")+"'" + ","
+						+ "gvhd ='" + convertFromUTF8(map.get("gvhd_them"))+"'" + ","
 						+ "magvhd ='" + map.get("idgvhd_them")+"'" +","
-						+ "gvpb ='" + map.get("gvpb_them")+"'" + ","
+						+ "gvpb ='" + convertFromUTF8(map.get("gvpb_them"))+"'" + ","
 						+ "magvpb ='" + map.get("idgvpb_them")+"'" + ","
 						+ "diem ='" + map.get("score_them")+"'" +","
 						+ "nam ='" + map.get("year_them")+"'" + ","

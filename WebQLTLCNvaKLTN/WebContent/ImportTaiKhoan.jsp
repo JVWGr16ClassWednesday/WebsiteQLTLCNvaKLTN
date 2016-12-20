@@ -38,7 +38,7 @@
                     <form name="form1" id="form1" action="Upload" method="post" enctype="multipart/form-data">
                         <label>Import tài khoản Giảng Viên</label>
                         <input type="file" name="file" multiple/>
-                        <input class="button" type="submit" name="Submit" value="Upload files"/>
+                        <input class="button" type="submit" name="Submit" value="Tạo Tài Khoản"/>
                         <br />
                         <br />
                         <!-- <a href="DanhSachTaiKhoanGiangVienDuocImport.jsp" class="btn btn-primary">Tạo Tài khoản</a> -->

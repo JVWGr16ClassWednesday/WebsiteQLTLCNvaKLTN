@@ -19,14 +19,12 @@ public class QuanLyTaiKhoan {
 			statement = connection.createStatement();
 			
 			String sql = "DELETE FROM users WHERE id='" + maGV + "'";
-//			System.out.println(sql);
 			statement.execute(sql);
 			statement.close();
 			
 			return true;
 		}
 		catch (Exception e) {
-			// TODO: handle exception
 		}
 		
 		return false;
@@ -38,17 +36,14 @@ public class QuanLyTaiKhoan {
 			statement = connection.createStatement();
 			
 			String sql = "SELECT accessright FROM users WHERE id='" + maGV + "'";
-//			System.out.println(sql);
 			ResultSet resultSet = statement.executeQuery(sql);
 			while (resultSet.next()){
 
 				res = resultSet.getInt("accessright");
 				statement.close();
 			}
-//			System.out.println(sql);
 		}
 		catch (Exception e) {
-			// TODO: handle exception
 		}
 		return res;
 	}
@@ -57,7 +52,6 @@ public class QuanLyTaiKhoan {
 		Statement statement = null;
 		try (Connection connection = ConnectionDB.getConnection()) {
 			statement = connection.createStatement();
-//			System.out.println("----->"+user.getMyname());
 			String sql = "UPDATE users" + " SET "
 					+ " username = '"+ user.getUsername()+"'" + ","
 					+ " password = '" + user.getPassword()+"'" + ","
@@ -65,13 +59,10 @@ public class QuanLyTaiKhoan {
 					+ " masv ='" +user.getMasv()+ "'" + ","
 					+ "accessright='" + user.getAccessright() + "'"
 					+ " WHERE id='"+ user.getId()+"'"; 
-			System.out.println(sql);
 			statement.executeUpdate(sql);
-			System.out.println("update thanh cong");
 			return true;
 		}
 		catch (Exception e) {
-			// TODO: handle exception
 		}
 		return false;
 	}
@@ -92,18 +83,15 @@ public class QuanLyTaiKhoan {
 	}
 	
 	public static boolean ThemTaiKhoan(Users user){
-		System.out.println("------");
 		Statement statement = null;
 		try (Connection connection = ConnectionDB.getConnection()) {
 			statement = connection.createStatement();	
 			String sql = "insert into users(username, password, myname, accessright,masv) values ('" + user.getUsername() + "','" + user.getPassword() + "','" + user.getMyname() + "','" + user.getAccessright() + "','" +user.getId() + "')";
-//			System.out.println(sql);
 			
 			statement.executeUpdate(sql);
 			return true;
 		}
 		catch (Exception e) {
-			// TODO: handle exception
 		}
 		return false;
 		
@@ -117,7 +105,6 @@ public class QuanLyTaiKhoan {
 			statement = connection.createStatement();
 			
 			String sql = "SELECT accessright,khoatk FROM users WHERE username ='" + username + "' and password= '" + password + "'" ;
-//			System.out.println(sql);
 			ResultSet resultSet = statement.executeQuery(sql);
 			while (resultSet.next()){
 
@@ -125,10 +112,8 @@ public class QuanLyTaiKhoan {
 				khoa_id = resultSet.getInt("khoatk");
 				statement.close();
 			}
-//			System.out.println(sql);
 		}
 		catch (Exception e) {
-			// TODO: handle exception
 		}
 		int list_res[] = {res, khoa_id};
 		
@@ -136,20 +121,16 @@ public class QuanLyTaiKhoan {
 	}
 	 // ham khoa tai khoan
 	public static boolean Khoataikhoan(int id_user, int khoaTK){
-		System.out.println("-----------------------");
 		Statement statement = null;
 		try (Connection connection = ConnectionDB.getConnection()) {
 			statement = connection.createStatement();
-//			System.out.println("----->"+user.getMyname());
 			String sql = "UPDATE users" + " SET "
 					+ " khoatk ='" + khoaTK + "'"
 					+ " WHERE id='"+ id_user+ "'"; 
-			System.out.println(sql);
 			statement.executeUpdate(sql);
 			return true;
 		}
 		catch (Exception e) {
-			// TODO: handle exception
 		}
 		return false;
 	}

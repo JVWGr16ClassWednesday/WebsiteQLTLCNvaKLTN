@@ -22,11 +22,9 @@ public class DangKyTaiKhoanServlet extends HttpServlet {
 
 	public DangKyTaiKhoanServlet() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
@@ -45,13 +43,11 @@ public class DangKyTaiKhoanServlet extends HttpServlet {
 			users.setUsername(email);
 			users.setAccessright(Integer.parseInt(role));
 			users.setPassword(password);
-//			System.out.println(id);
 			if (QuanLyTaiKhoan.check_email(email)) {
 				response.sendRedirect("TaoTaiKhoan.jsp");
 			}
 			if(QuanLyTaiKhoan.ThemTaiKhoan(users))
 			{
-//				System.out.println("------------------->");
 				if(role.equals("1")){
 					response.sendRedirect("DanhSachTaiKhoanGV.jsp");
 				}else{
@@ -60,7 +56,6 @@ public class DangKyTaiKhoanServlet extends HttpServlet {
 			}
 
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

@@ -20,16 +20,13 @@ import javax.servlet.http.HttpSession;
 import model.DeTai;
 import utils.ConnectionDB;
 
-/**
- * Servlet implementation class TimKiemDeTaiServlet
- */
+
 @WebServlet("/TimKiemDeTaiSVServlet")
 public class TimKiemDeTaiSVServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
    
     public TimKiemDeTaiSVServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
     
     public String convertFromUTF8(String s){
@@ -43,22 +40,18 @@ public class TimKiemDeTaiSVServlet extends HttpServlet {
 	}
     
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//HttpSession session = request.getSession();
 		String ndtim = request.getParameter("txttimkiem");
 		String ndungtimcv = convertFromUTF8(ndtim);
 		System.out.println(ndungtimcv);
 		Statement statement = null;
-		String res = "";
 		try (Connection connection = ConnectionDB.getConnection()) {
 			statement = connection.createStatement();
 			String sql = "SELECT * FROM detai WHERE MATCH(tendt,motadt,truongnhom,thanhvien,gvhd,tailieu) AGAINST ('" + ndungtimcv + "'"+" IN NATURAL LANGUAGE MODE)";
-//			System.out.println(sql);			
 			ResultSet resultSet = statement.executeQuery(sql);
 			
 			List<DeTai> deTais = new ArrayList<DeTai>();
@@ -86,9 +79,7 @@ public class TimKiemDeTaiSVServlet extends HttpServlet {
 				System.out.println("khong tim duojc ket qua");
 				response.sendRedirect("TimKiemDeTaiSV.jsp");
 			}
-//			System.out.println(deTais.get(0).getTendt());
-			
-//			System.out.println(deTais);
+
 		    request.setAttribute("name", deTais);
 			request.getRequestDispatcher("TimKiemDeTaiSV.jsp").forward(request, response);
 		}

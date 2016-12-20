@@ -23,6 +23,7 @@
 	</style>
 </head>
 <body>
+	<%--Khi user dang nhap vao thi form se chạy tới class Controller vào servler KiemTraDangNhapServlet thực hiện kiểm tra đăng nhập --%>
 	<form  action="KiemTraDangNhap" method="post" id="FrmDN" novalidate="novalidate">
 	<%-- <input type="text" value="<%=session.getAttribute("error")%>" > --%>
 		<div class="container">
@@ -49,6 +50,8 @@
                     <a class="btn btn-danger" href="TrangChu.jsp">Hủy</a>
                 </div>
                 <font color="red">
+                <%--Khi user đăng nhập, servlet sẽ kiểm tra xem tài khoản đó có hợp lệ hay không: hợp lệ là không bị khóa,
+                 access đúng theo username, nếu không hợp lệ servlet sẽ trả về session một thông báo --%>
                <c:set var="er" value='<%=session.getAttribute("error")%>'></c:set>
 		        <c:if test="${er == true }">
 		            <c:out value="Tên đăng nhập hoặc mật khẩu sai" />
@@ -75,6 +78,8 @@
   
 /*   // When the browser is ready...
  */ 
+ <%-- jquery này sẽ thực hiện kiểm tra validate các trường input ở form trên sau dấu #là id của form.
+  Hàm này được thực hiện khi người dùng click vào button có type="submit"--%>
  $(function() {
   
     // Setup form validation on the #register-form element

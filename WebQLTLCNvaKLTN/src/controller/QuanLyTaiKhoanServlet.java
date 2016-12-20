@@ -42,19 +42,9 @@ public class QuanLyTaiKhoanServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
-		//String row_id = request.getParameter("row_id");
 		String user_id_khoa = request.getParameter("user_id");
-		//String btnkhoa = request.getParameter("value_btnkhoa");
 		
 		String user_id = request.getParameter("id_user");
-		//String name = request.getParameter("tensua");
-		//String email = request.getParameter("emailsua");
-		//String password =request.getParameter("passsua");
-		//String masv = request.getParameter("masvsua");
-		//String access = request.getParameter("Check_Quyen");
-		
-//		System.out.println("access: " + access);
-	
 		
 		String btnxoa = request.getParameter("btnxoa");
 //		System.out.println("nội dung button xóa---->" + btnxoa);
@@ -79,8 +69,6 @@ public class QuanLyTaiKhoanServlet extends HttpServlet {
 					response.sendRedirect("DanhSachTaiKhoanSV.jsp");
 				}
 				
-				//System.out.println("khoa tai khoản");
-				//response.sendRedirect("DanhSachTaiKhoanGV.jsp");
 			}
 		}
 		//neu value_btnkhoa ==2 thì thuc hien mo khoa tai khoan
@@ -94,8 +82,7 @@ public class QuanLyTaiKhoanServlet extends HttpServlet {
 				if (res==2) {
 					response.sendRedirect("DanhSachTaiKhoanSV.jsp");
 				}
-//				System.out.println("mở khoa tai khoản");
-//				response.sendRedirect("DanhSachTaiKhoanGV.jsp");
+
 			}
 			
 		}

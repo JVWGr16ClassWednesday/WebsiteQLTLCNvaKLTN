@@ -17,6 +17,24 @@
 <link rel="stylesheet" href="css/font-awesome.min.css">
 <script src="js/jquery.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
+<style>
+		table {
+		    border-collapse: collapse;
+		    width: 100%;
+		}
+		
+		th, td {
+		    text-align: left;
+		    padding: 8px;
+		}
+		
+		tr:nth-child(even){background-color: #f2f2f2}
+		
+		th {
+		    background-color: #4CAF50;
+		    color: white;
+		}
+	</style>
 <script>
     	function getRow_ID(row_id){
      		console.log(row_id);

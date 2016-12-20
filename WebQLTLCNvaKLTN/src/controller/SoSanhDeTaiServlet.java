@@ -76,9 +76,7 @@ public class SoSanhDeTaiServlet extends HttpServlet {
 			while (resultSet.next()){
 				res = resultSet.getString("motadt");
 				double per = Double.parseDouble(percent);
-				System.out.println("so phan tram nhap vao: "+ per);
 				double ketqua = (compareStrings((convertFromUTF8(mota)),res )*100);
-				System.out.println("so phan tram so sanh duoc: "+ ketqua);
 				if(ketqua < per){
 					String message = "No Result";
 					request.setAttribute("message", message);

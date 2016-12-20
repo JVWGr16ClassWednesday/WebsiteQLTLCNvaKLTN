@@ -1,7 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql"%>
-<%@ page language="java" contentType="text/html; charset=utf-8"
-	pageEncoding="utf-8"%>
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ taglib uri="/WEB-INF/tlds/taglib.tld" prefix="tag"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="s" %>
@@ -20,6 +19,27 @@
 <link rel="stylesheet" href="css/font-awesome.min.css">
 <script src="js/jquery.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
+<%--Định nghĩa lại style boostrap chỉnh sửa màu sắc của table --%>
+<style>
+	table {
+	    border-collapse: collapse;
+	    width: 100%;
+	}
+	
+	th, td {
+	    text-align: left;
+	    padding: 8px;
+	}
+	
+	tr:nth-child(even){background-color: #f2f2f2}
+	
+	th {
+	    background-color: #4CAF50;
+	    color: white;
+}
+</style>
+
+<%--đoạn script lấy id khi thực hiện click vào button, truyền id đó vào id của một trường input có id  là row_id --%>
 <script>
 	function get_rowID(row_id) {
 		console.log(row_id);
@@ -44,16 +64,18 @@
 
 <script>
 	function change_icon(id) {
+		// truyền nội dung id vào trường input có id là user_id
 		document.getElementById('user_id').value = id;
+		//lấy id của dòng hiện đang select 
 		var btnKhoa = document.getElementById("id_khoa_" + id);
 		//console.log('btnKhoa.value');
-		console.log("innerHTML " + btnKhoa.innerHTML);
-		console.log("innerText " +btnKhoa.innerText);
-		
+		//kiểm tra nếu nội dung của btn khóa, text của Span là  Khóa, thì set lại thẻ <span> với icon là ổ khóa đóng và text hiển thị lên mà Mở Khóa
 		if (btnKhoa.innerText == ' Khóa') {
 			btnKhoa.innerHTML = '<span class="fa fa-lock" aria-hidden="true"></span> Mở khóa'
+			//gán giá trị là Khoa cho trường input có id là value_btnkhoa
 			document.getElementById('value_btnkhoa').value = 'Khoa';
 		}
+		//ngược lại cái ở trên
 		else {
 			btnKhoa.innerHTML = '<span class="fa fa-unlock" aria-hidden="true"></span> Khóa'
 			document.getElementById('value_btnkhoa').value = 'Mo khoa';
@@ -114,7 +136,7 @@ Z	}
 														name="btnkhoa"
 														class="btn btn-warning btn-xs" 
 														id="id_khoa_${row[0]}" 
-														onclick="change_icon('${row[0]}')">
+														onclick="change_icon(${row[0]})">
 														<c:choose>
 											        		<c:when test="${row[6] == 1}">
 											        			<span class="fa fa-unlock" aria-hidden="true"></span> Khóa
