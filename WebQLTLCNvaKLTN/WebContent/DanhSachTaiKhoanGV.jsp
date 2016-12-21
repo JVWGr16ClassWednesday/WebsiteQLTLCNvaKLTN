@@ -146,6 +146,7 @@ Z	}
 											        		</c:when>
 											        	</c:choose>
 												</button>
+												
 												<button type="button" class="btn btn-info btn-xs"
 													data-toggle="modal" data-target="#modalSua"
 													data-username="${row[1]}"

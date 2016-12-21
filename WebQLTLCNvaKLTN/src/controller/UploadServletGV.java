@@ -136,13 +136,11 @@ public class UploadServletGV extends HttpServlet {
 						 File file;
 						if(fileName.lastIndexOf("\\")>=0)
 						 {
-							System.out.println("tao vô đây rôi!!!");
 							 
 							 file = new File(filePath1+fileName.substring(fileName.lastIndexOf("\\")));
 						 }
 						 else
 						 {
-							 System.out.println("tao vô đây rôi lần 2!!!");
 							 file = new File(filePath1+fileName.substring(fileName.lastIndexOf("\\")+1));
 						 }
 						 fi.write(file);
